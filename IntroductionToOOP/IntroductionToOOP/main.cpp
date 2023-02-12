@@ -1,5 +1,8 @@
 ﻿#include<iostream>
-using namespace std;
+//using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 class Point
 {
@@ -10,11 +13,68 @@ class Point
 	double x;
 	double y;
 public:
+	double get_x()const
+	{
+		return x;
+	}
+	double get_y()const
+	{
+		return y;
+	}
+	void set_x(double x)
+	{
+		this->x = x;
+	}
+	void set_y(double y)
+	{
+		this->y = y;
+	}
+
+	//				  Constructors:
+	/*Point()
+	{
+		x = y = double();
+		cout << "DefaultConstructor:\t" << this << endl;
+	}
+	Point(double x)
+	{
+		this->x = x;
+		this->y = 0;
+		cout << "1ArgConstructor:\t" << this << endl;
+	}*/
+	Point(double x = 0, double y = 0)
+	{
+		this->x = x;
+		this->y = y;
+		cout << "Constructor:\t\t" << this << endl;
+	}
+	~Point()
+	{
+		cout << "Destructor:\t\t" << this << endl;
+	}
+
+	//					Methods:
+	void print()const
+	{
+		cout << "X = " << x << "\tY = " << y << endl;
+	}
 };
+
+int add(int a = 0, int b = 0)
+{
+	return a + b;
+}
+
+//#define STRUCT_POINT
 
 void main()
 {
 	setlocale(LC_ALL, "Russian");
+
+	//cout << add() << endl;
+	//cout << "\n----------------------------\n";
+
+#ifdef STRUCT_POINT
 	int a;	//Объявление переменной 'a' типа 'int'
 	Point A;//Объявление переменной 'A' типа 'Point'
 			//Создание объекта 'A' структуры 'Point'
@@ -27,11 +87,30 @@ void main()
 
 	Point* pA = &A;	//https://ru.wikipedia.org/wiki/%D0%92%D0%B5%D0%BD%D0%B3%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BD%D0%BE%D1%82%D0%B0%D1%86%D0%B8%D1%8F
 	cout << pA->x << "\t" << pA->y << endl;
+#endif // STRUCT_POINT
+
+	Point A;		//Здесь вызывается конструктор по умолчанию (Default constructor)
+	//A.set_x(2);
+	//A.set_y(3);
+	cout << A.get_x() << "\t" << A.get_y() << endl;
+	A.print();
+
+	Point B = 5;	//Single-argument constructor
+	B.print();
+
+	Point C(22, 33);
+	C.print();
+
+	/*for (int i = 0; i < 10; i++)
+	{
+		cout << i << "\t";
+	}
+	cout << endl;*/
 }
 
 /*
 --------------------------------------------------------------
-.  - Оператор прямого доступа (Point operator) 
+.  - Оператор прямого доступа (Point operator)
 	 используется для доступа к полям объекта по ИМЕНИ объекта.
 
 -> - Оператор косвенного доступа (Arrow operator)
@@ -57,5 +136,19 @@ void main()
 							  Кроме того, set-методы обеспечивают фильтрацию данных.
 2. Inheritance;
 3. Polymorphism;
+--------------------------------------------------------------
+*/
+
+/*
+--------------------------------------------------------------
+				Special members:
+1. Constructor - это метод, который создает объект.
+	-с параметрами;
+	-без параметров;
+	-конструктор по умолчанию - это конструктор, который может быть вызван без параметров;
+	-конструктор копирования;
+	-конструктор переноса;
+2. ~Destructor - это метод, который уничтожвет объект по завершении его времени жизни;
+3. Assignment operator;
 --------------------------------------------------------------
 */
