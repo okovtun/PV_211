@@ -4,6 +4,8 @@ using std::cin;
 using std::cout;
 using std::endl;
 
+#define delimiter "\n-------------------------\n"
+
 class Point
 {
 	//Создавая структуру или класс мы создаем новый тип данных
@@ -48,17 +50,40 @@ public:
 		this->y = y;
 		cout << "Constructor:\t\t" << this << endl;
 	}
+	Point(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyConstructor:\t" << this << endl;
+	}
 	~Point()
 	{
 		cout << "Destructor:\t\t" << this << endl;
 	}
 
 	//					Methods:
+	double distance(const Point& other)const 
+	{
+		//this - эта точка
+		//other - та точка
+		double x_distance = this->x - other.x;
+		double y_distance = this->y - other.y;
+		double distance = sqrt(x_distance*x_distance + y_distance * y_distance);
+		return distance;
+	}
 	void print()const
 	{
 		cout << "X = " << x << "\tY = " << y << endl;
 	}
 };
+
+double distance(const Point& A, const Point& B)
+{
+	double x_distance = A.get_x() - B.get_x();
+	double y_distance = A.get_y() - B.get_y();
+	double distance = sqrt(x_distance*x_distance + y_distance * y_distance);
+	return distance;
+}
 
 int add(int a = 0, int b = 0)
 {
@@ -66,6 +91,8 @@ int add(int a = 0, int b = 0)
 }
 
 //#define STRUCT_POINT
+//#define CONTRUCTORS_CHECK
+#define DISTANCE_CHECK
 
 void main()
 {
@@ -89,9 +116,10 @@ void main()
 	cout << pA->x << "\t" << pA->y << endl;
 #endif // STRUCT_POINT
 
+#ifdef CONTRUCTORS_CHECK
 	Point A;		//Здесь вызывается конструктор по умолчанию (Default constructor)
-	//A.set_x(2);
-	//A.set_y(3);
+//A.set_x(2);
+//A.set_y(3);
 	cout << A.get_x() << "\t" << A.get_y() << endl;
 	A.print();
 
@@ -101,11 +129,42 @@ void main()
 	Point C(22, 33);
 	C.print();
 
+	Point D = C;	//Copy constructor
+	D.print();
+
 	/*for (int i = 0; i < 10; i++)
 	{
 		cout << i << "\t";
 	}
 	cout << endl;*/
+#endif // CONTRUCTORS_CHECK
+
+#ifdef DISTANCE_CHECK
+	/*
+------------------
+1. Создается объект;
+2. Для него вызывается метод;
+3. В этот метод передается указанная точка
+   (которая так же предварительно должна быть создана);
+------------------
+*/
+
+	Point A(2, 3);
+	A.print();
+
+	Point B(4, 5);
+	B.print();
+	cout << delimiter << endl;
+	cout << "Расстояние от точки A до точки B:" << A.distance(B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние от точки B до точки A:" << B.distance(A) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками A и B:  " << distance(A, B) << endl;
+	cout << delimiter << endl;
+	cout << "Расстояние между точками B и A:  " << distance(B, A) << endl;
+	cout << delimiter << endl;
+#endif // DISTANCE_CHECK
+
 }
 
 /*
