@@ -61,6 +61,30 @@ public:
 		cout << "Destructor:\t\t" << this << endl;
 	}
 
+	//					Operators:
+	Point& operator=(const Point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		cout << "CopyAssignment:\t\t" << this << endl;
+		return *this;
+	}
+
+	Point& operator++()	//Prefix increment
+	{
+		x++;
+		y++;
+		return *this;
+	}
+	Point operator++(int)
+	{
+		Point old = *this;	//сохраняем старое значение объекта
+		//Изменяем объект:
+		x++;
+		y++;
+		return old;
+	}
+
 	//					Methods:
 	double distance(const Point& other)const 
 	{
@@ -77,6 +101,14 @@ public:
 	}
 };
 
+Point operator+(const Point& left, const Point& right)
+{
+	Point res;
+	res.set_x(left.get_x() + right.get_x());
+	res.set_y(left.get_y() + right.get_y());
+	return res;
+}
+
 double distance(const Point& A, const Point& B)
 {
 	double x_distance = A.get_x() - B.get_x();
@@ -92,7 +124,8 @@ int add(int a = 0, int b = 0)
 
 //#define STRUCT_POINT
 //#define CONTRUCTORS_CHECK
-#define DISTANCE_CHECK
+//#define DISTANCE_CHECK
+//#define ASSIGNMENT_CHECK
 
 void main()
 {
@@ -132,6 +165,10 @@ void main()
 	Point D = C;	//Copy constructor
 	D.print();
 
+	Point E;		//Default constructor
+	E = D;			//Copy assignment
+	E.print();
+
 	/*for (int i = 0; i < 10; i++)
 	{
 		cout << i << "\t";
@@ -165,6 +202,30 @@ void main()
 	cout << delimiter << endl;
 #endif // DISTANCE_CHECK
 
+#ifdef ASSIGNMENT_CHECK
+	//Copy assignment:
+
+	int a, b, c;
+	a = b = c = 2;
+	cout << a << "\t" << b << "\t" << c << endl;
+
+	Point A, B, C;
+	cout << "\n-------------------------------\n";
+	A = B = C = Point(2, 3);
+	cout << "\n-------------------------------\n";
+	A.print();
+	B.print();
+	C.print();
+#endif // ASSIGNMENT_CHECK
+
+	int a = 2;
+	int b = 3;
+	int c = a + b;
+
+	Point A(2, 3);	A.print();
+	Point B(4, 5);	B.print();
+	Point C = A + B;C.print();
+	C++; C.print();
 }
 
 /*
@@ -209,5 +270,37 @@ void main()
 	-конструктор переноса;
 2. ~Destructor - это метод, который уничтожвет объект по завершении его времени жизни;
 3. Assignment operator;
+--------------------------------------------------------------
+*/
+
+/*
+--------------------------------------------------------------
+				Overloading rules
+1. Перегрузить можно только существующие операторы. Создавать новые операторы невозможно.
+	Например:
+	+  - перегружается;
+	++ - перегружается;
+	*  - перегружается;
+	** - НЕ перегружается;
+2. Не все существующие операторы можно перегрузить.
+   Не перегружаются:
+	?: - Ternary operator
+	:: - Scope operator (Оператор разрешения видимости)
+	.  - Оператор прямого доступа (Point operator)
+	.* - Pointer to member selection
+	#  - Preprocessor directive
+	## - Preprocessor concatenation
+3. Перегруженные операторы сохраняют приоритет.
+	a = b + c * d + e / f;
+4. Переопределить поведение операторов над встроенными типами невозможно.
+
+	"Hello" + "World" = "HelloWorld";
+--------------------------------------------------------------
+	type operator@(....)
+	{
+		....;
+		code;
+		....;
+	}
 --------------------------------------------------------------
 */
