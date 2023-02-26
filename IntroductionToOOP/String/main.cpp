@@ -1,10 +1,10 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 class String
 {
-	int size;	//размер строки в Байтах
-	char* str;	//указатель на строку в динамической памяти
+	int size;	//СЂР°Р·РјРµСЂ СЃС‚СЂРѕРєРё РІ Р‘Р°Р№С‚Р°С…
+	char* str;	//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃС‚СЂРѕРєСѓ РІ РґРёРЅР°РјРёС‡РµСЃРєРѕР№ РїР°РјСЏС‚Рё
 public:
 	int get_size()const
 	{

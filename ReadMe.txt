@@ -3,9 +3,10 @@ https://www.youtube.com/watch?v=8WOtMA8pv4Y&list=PLeqyOOqxeiIMa-0fDCp-lpJ_qmDrZB
 
 TODO:
 1. Пять проектов на выбор залить на GitHub;
-2. В проекте IntroductionToOOP\String реализовать класс String, описывающий строку.
-   По умолчанию должна создаваться пустая строка размером 80Байт.
-   Класс должен обеспечивать следующие операции над строками:
+2. 
+   Проверочный код в проекте IntroductionToOOP\String:
+	https://github.com/okovtun/PV_211/blob/3f251e284849ad3896fd7e019ca2d3d8571497b9/IntroductionToOOP/String/main.cpp#L48
+   должен заработать.
 
 DONE:
 1. Проверочный код в секции HOME_WORK_1 должен заработать:
