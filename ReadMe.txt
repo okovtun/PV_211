@@ -2,9 +2,12 @@
 https://www.youtube.com/watch?v=8WOtMA8pv4Y&list=PLeqyOOqxeiIMa-0fDCp-lpJ_qmDrZBmRI
 
 TODO:
+Добавить в класс String Move-методы:
+https://legacy.cplusplus.com/doc/tutorial/classes2/
+
+DONE:
 1. Пять проектов на выбор залить на GitHub;
-2. 
-   Проверочный код в проекте IntroductionToOOP\String:
+2. Проверочный код в проекте IntroductionToOOP\String:
 	https://github.com/okovtun/PV_211/blob/3f251e284849ad3896fd7e019ca2d3d8571497b9/IntroductionToOOP/String/main.cpp#L48
    должен заработать.
 
