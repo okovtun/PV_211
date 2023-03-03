@@ -5,6 +5,11 @@ TOREAD:
 https://en.cppreference.com/w/
 
 TODO:
+От ветки 'master' создать ветку 'Separation', 
+и в этой ветке вынести в отдельные файлы сначала класс 'Point',
+а потом класс 'Fraction'.
+
+DONE:
 Добавить в класс String Move-методы:
 https://legacy.cplusplus.com/doc/tutorial/classes2/
 
