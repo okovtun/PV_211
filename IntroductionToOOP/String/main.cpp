@@ -27,7 +27,7 @@ public:
 	{
 		cout << "DefConstructor:\t" << this << endl;
 	}
-	String(const char* str) :size(strlen(str) + 1), str(new char[size] {})
+	String(const char* str) :String(strlen(str) + 1)
 	{
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
@@ -36,17 +36,16 @@ public:
 	//other
 	//this
 	//Shallow copy (Поверхностное копирование)
-	String(const String& other) :size(other.size), str(new char[size] {})
+	String(const String& other) :String(other.str)
 	{
 		//this->size = other.size;
 		//Deep copy (Побитовое копирование):
 		//this->str = new char[size] {};
-		for (int i = 0; i < size; i++)
-			this->str[i] = other.str[i];
+		
 		//-----------------------------
 		cout << "CopyConstructor:" << this << endl;
 	}
-	String(String&& other):size(other.size), str(other.str)
+	String(String&& other) :size(other.size), str(other.str)
 	{
 		other.size = 0;
 		other.str = nullptr;
@@ -117,10 +116,10 @@ String operator+(const String& left, const String& right)
 	String cat(left.get_size() + right.get_size() - 1);
 	for (int i = 0; i < left.get_size(); i++)
 		cat[i] = left[i];
-		//cat.get_str()[i] = left.get_str()[i];
+	//cat.get_str()[i] = left.get_str()[i];
 	for (int i = 0; i < right.get_size(); i++)
 		cat[i + left.get_size() - 1] = right[i];
-		//cat.get_str()[i + left.get_size() - 1] = right.get_str()[i];
+	//cat.get_str()[i + left.get_size() - 1] = right.get_str()[i];
 	return cat;
 
 	//		l-value = r-value;
@@ -158,7 +157,7 @@ void main()
 	String str4 = str1;
 	cout << str4 << endl;
 #endif // HOME_WORK
-	
+
 	//MoveMethods:
 	//"The rule of three": CopyConstructor, CopyAssignment, ~Destructor
 	//"The rule of zero"
