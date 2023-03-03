@@ -1,6 +1,9 @@
 ﻿https://github.com/okovtun/PV_211.git
 https://www.youtube.com/watch?v=8WOtMA8pv4Y&list=PLeqyOOqxeiIMa-0fDCp-lpJ_qmDrZBmRI
 
+TOREAD:
+https://en.cppreference.com/w/
+
 TODO:
 Добавить в класс String Move-методы:
 https://legacy.cplusplus.com/doc/tutorial/classes2/

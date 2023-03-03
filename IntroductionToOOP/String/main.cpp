@@ -50,6 +50,14 @@ public:
 		//-----------------------------
 		cout << "CopyConstructor:" << this << endl;
 	}
+	String(String&& other)
+	{
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveConstructor:" << this << endl;
+	}
 	~String()
 	{
 		delete[] this->str;
@@ -75,6 +83,17 @@ public:
 			this->str[i] = other.str[i];
 		//-----------------------------
 		cout << "CopyAssignment:\t" << this << endl;
+		return *this;
+	}
+	String& operator=(String&& other)
+	{
+		if (this == &other)return *this;
+		delete[] this->str;
+		this->size = other.size;
+		this->str = other.str;
+		other.size = 0;
+		other.str = nullptr;
+		cout << "MoveAssignment:\t" << this << endl;
 		return *this;
 	}
 	String& operator+=(const String& other)
@@ -136,7 +155,7 @@ void main()
 
 	//String str3 = str1 + str2;	//Copy constructor
 	String str3;
-	str3 = str1 + " " + str2;	//Copy assignment
+	str3 = str1 + str2;	//Copy assignment
 	cout << str3 << endl;
 
 	str1 += str2;
