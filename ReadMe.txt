@@ -5,6 +5,9 @@ TOREAD:
 https://en.cppreference.com/w/
 
 TODO:
+Реализовать проект Academy;
+
+DONE:
 От ветки 'master' создать ветку 'Separation', 
 и в этой ветке вынести в отдельные файлы сначала класс 'Point',
 а потом класс 'Fraction'.
