@@ -54,6 +54,11 @@ public:
 	}
 };
 
+std::ostream& operator<<(std::ostream& os, const Human& obj)
+{
+	return os << obj.get_last_name() << " " << obj.get_first_name() << " " << obj.get_age();
+}
+
 #define STUDENT_TAKE_PARAMETERS	const std::string& speciality, const std::string& group, double rating, double attendance
 #define STUDENT_GIVE_PARAMETERS	speciality, group, rating, attendance
 class Student :public Human
@@ -117,6 +122,10 @@ public:
 		cout << speciality << " " << group << " " << rating << " " << attendance << endl;
 	}
 };
+std::ostream& operator<<(std::ostream& os, const Student& obj)
+{
+	return os<< (Human&)obj << " " << obj.get_speciality() << " " << obj.get_group() << " " << obj.get_rating() << " " << obj.get_attendance();
+}
 
 #define TEACHER_TAKE_PARAMETERS	const std::string& speciality, double experience
 #define TEACHER_GIVE_PARAMETERS	speciality, experience
@@ -161,6 +170,10 @@ public:
 		cout << speciality << " " << experience << " лет.\n";
 	}
 };
+std::ostream& operator<<(std::ostream& os, const Teacher& obj)
+{
+	return os << (Human&)obj << " " << obj.get_speciality() << " " << obj.get_experience();
+}
 
 #define GRADUATE_TAKE_PARAMETERS	const std::string& subject
 #define GRADUATE_GIVE_PARAMETERS	subject
@@ -192,6 +205,10 @@ public:
 		cout << subject << endl;
 	}
 };
+std::ostream& operator<<(std::ostream& os, const Graduate& obj)
+{
+	return os << (Student&)obj << " " << obj.get_subject();
+}
 
 //#define INHERITANCE_CHECK
 #define POLYMORPHISM	//(многоформенность)
@@ -235,7 +252,10 @@ void main()
 	for (int i = 0; i < sizeof(group) / sizeof(group[0]); i++)
 	{
 		cout << typeid(*group[i]).name() << endl;
-		group[i]->info();
+		//group[i]->info();
+		if(typeid(*group[i]) == typeid(Student))cout << *dynamic_cast<Student*>(group[i]) << endl;
+		if(typeid(*group[i]) == typeid(Graduate))cout << *dynamic_cast<Graduate*>(group[i]) << endl;
+		if(typeid(*group[i]) == typeid(Teacher))cout << *dynamic_cast<Teacher*>(group[i]) << endl;
 		cout << "\n------------------------------------\n";
 	}
 
