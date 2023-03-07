@@ -52,7 +52,15 @@ public:
 	{
 		cout << last_name << " " << first_name << " " << age << endl;
 	}
+	virtual std::ostream& print(std::ostream& os)const
+	{
+		return os << last_name << " " << first_name << " " << age;
+	}
 };
+std::ostream& operator<<(std::ostream& os, const Human& obj)
+{
+	return obj.print(os);
+}
 
 #define STUDENT_TAKE_PARAMETERS	const std::string& speciality, const std::string& group, double rating, double attendance
 #define STUDENT_GIVE_PARAMETERS	speciality, group, rating, attendance
@@ -97,7 +105,7 @@ public:
 	}
 
 	//					Constructors:
-	Student(HUMAN_TAKE_PARAMETERS,STUDENT_TAKE_PARAMETERS):Human(HUMAN_GIVE_PARAMETERS)
+	Student(HUMAN_TAKE_PARAMETERS, STUDENT_TAKE_PARAMETERS) :Human(HUMAN_GIVE_PARAMETERS)
 	{
 		set_speciality(speciality);
 		set_group(group);
@@ -115,6 +123,10 @@ public:
 	{
 		Human::info();
 		cout << speciality << " " << group << " " << rating << " " << attendance << endl;
+	}
+	std::ostream& print(std::ostream& os)const override
+	{
+		return Human::print(os) << " " << speciality << " " << group << " " << rating << " " << attendance;
 	}
 };
 
@@ -143,7 +155,7 @@ public:
 	}
 
 	//					Constructors:
-	Teacher(HUMAN_TAKE_PARAMETERS,TEACHER_TAKE_PARAMETERS) :Human(HUMAN_GIVE_PARAMETERS)
+	Teacher(HUMAN_TAKE_PARAMETERS, TEACHER_TAKE_PARAMETERS) :Human(HUMAN_GIVE_PARAMETERS)
 	{
 		set_speciality(speciality);
 		set_experiece(experience);
@@ -159,6 +171,10 @@ public:
 	{
 		Human::info();
 		cout << speciality << " " << experience << " лет.\n";
+	}
+	std::ostream& print(std::ostream& os)const override
+	{
+		return Human::print(os) << " " << speciality << " " << experience;
 	}
 };
 
@@ -190,6 +206,10 @@ public:
 	{
 		Student::info();
 		cout << subject << endl;
+	}
+	std::ostream& print(std::ostream& os)const override
+	{
+		return Student::print(os) << " " << subject;
 	}
 };
 
@@ -231,11 +251,12 @@ void main()
 		new Student("Vercetti", "Tomas", 30, "Criminalistic", "Vice", 98, 99),
 		new Teacher("Diaz", "Ricardo", 50, "Weapons distribution", 20)
 	};
-	cout << sizeof(group)/sizeof(group[0]) << endl;
+	cout << sizeof(group) / sizeof(group[0]) << endl;
 	for (int i = 0; i < sizeof(group) / sizeof(group[0]); i++)
 	{
 		cout << typeid(*group[i]).name() << endl;
-		group[i]->info();
+		//group[i]->info();
+		cout << *group[i] << endl;
 		cout << "\n------------------------------------\n";
 	}
 
