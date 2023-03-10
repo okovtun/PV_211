@@ -14,10 +14,23 @@ void main()
 	char sz_ip_buffer[IP_SIZE] = {};
 	char sz_mac_buffer[MAC_SIZE] = {};
 
-	char sz_filename[FILENAME_MAX] = {};
-	cout << "Введите имя файла: "; cin.getline(sz_filename, FILENAME_MAX);
-	if (strcmp(sz_filename + strlen(sz_filename) - 4, ".txt"))
-		strcat(sz_filename, ".txt");
+	char sz_room_number[FILENAME_MAX] = {};
+	cout << "Введите имя файла: "; cin.getline(sz_room_number, FILENAME_MAX);
+	char sz_src_filename[FILENAME_MAX] = {};
+	char sz_wal_filename[FILENAME_MAX] = {};
+	char sz_dhcpd_filename[FILENAME_MAX] = {};
+
+	strcat(sz_src_filename, sz_room_number);
+	strcat(sz_src_filename, " RAW.txt");
+
+	strcat(sz_wal_filename, sz_room_number);
+	strcat(sz_wal_filename, " ready.txt");
+
+	strcat(sz_dhcpd_filename, sz_room_number);
+	strcat(sz_dhcpd_filename, ".dhcpd");
+
+	if (strcmp(sz_src_filename + strlen(sz_src_filename) - 4, ".txt"))
+		strcat(sz_src_filename, ".txt");
 	/*
 		int strcmp(const char* str1, const char str2);
 		Функция strcmp(StringCompare) выполняет сравнение строк,
@@ -27,10 +40,10 @@ void main()
 		Функция strcat() выполняет конкатенацию строк (сложение строк), т.е., в конец первой строки str1
 		добавляет вторую строку str2
 	*/
-	cout << sz_filename << endl;
+	cout << sz_src_filename << endl;
 
-	std::ofstream fout("201 ready.txt");
-	std::ifstream fin(sz_filename);
+	std::ofstream fout(sz_wal_filename);
+	std::ifstream fin(sz_src_filename);
 	if (fin.is_open())
 	{
 		//TODO: read file
@@ -49,14 +62,14 @@ void main()
 	fout.close();
 
 	char sz_command[FILENAME_MAX] = "start notepad ";
-	strcat(sz_command, "201 ready.txt");
+	strcat(sz_command, sz_wal_filename);
 
 	system(sz_command);
 
 	////////////////////////////////////////////////////////////////////////
 
-	fout.open("201.dhcpd");
-	fin.open(sz_filename);
+	fout.open(sz_dhcpd_filename);
+	fin.open(sz_src_filename);
 	if (fin.is_open())
 	{
 		//TODO: read file....
@@ -71,14 +84,14 @@ void main()
 			for (int i = 0; sz_mac_buffer[i]; i++)
 				if (sz_mac_buffer[i] == '-')sz_mac_buffer[i] = ':';
 
-			cout << "host-" << i + 1 << endl;
+			cout << "host " << sz_room_number<< "-" << i + 1 << endl;
 			cout << "{\n";
 			cout << "\thardware ethernet\t" << sz_mac_buffer << ";\n";
 			cout << "\tfixed-address\t\t" << sz_ip_buffer << ";\n";
 			cout << "}\n";
 			cout << endl;
 
-			fout << "host-" << i + 1 << endl;
+			fout << "host " << sz_room_number << "-" << i + 1 << endl;
 			fout << "{\n";
 			fout << "\thardware ethernet\t" << sz_mac_buffer << ";\n";
 			fout << "\tfixed-address\t\t" << sz_ip_buffer << ";\n";
@@ -93,5 +106,7 @@ void main()
 	}
 	fout.close();
 
-	system("notepad 201.dhcpd");
+	strcpy(sz_command, "start notepad ");	//StringCopy, копирует вторую строку в первую
+	strcat(sz_command, sz_dhcpd_filename);
+	system(sz_command);
 }
