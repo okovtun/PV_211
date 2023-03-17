@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include<Windows.h>
 #include<iostream>
 using namespace std;
@@ -138,11 +139,62 @@ namespace Geometry
 			Shape::info();
 		}
 	};
+	class Circle :public Shape
+	{
+		double radius;
+	public:
+		Circle(double radius)
+		{
+			set_radius(radius);
+		}
+		~Circle() {}
+		double get_radius()const
+		{
+			return this->radius;
+		}
+		void set_radius(double radius)
+		{
+			if (radius < 50)radius = 50;
+			if (radius > 300)radius = 300;
+			this->radius = radius;
+		}
+		double get_area()const override
+		{
+			return M_PI * radius*radius;
+		}
+		double get_perimeter()const override
+		{
+			return 2 * radius*M_PI;
+		}
+		void draw()const override
+		{
+			HWND hwnd = GetDesktopWindow();
+			HDC hdc = GetDC(hwnd);
+
+			HPEN hPen = CreatePen(PS_SOLID, 5, RGB(255, 255, 0));
+			HBRUSH hBrush = CreateSolidBrush(RGB(255, 255, 0));
+
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			::Ellipse(hdc, 700, 100, 900, 300);
+
+			DeleteObject(hPen);
+			DeleteObject(hBrush);
+
+			ReleaseDC(hwnd, hdc);
+		}
+	};
 }
 
 void main()
 {
 	setlocale(LC_ALL, "");
+
+	//HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	//COORD coord;
+	//SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
+
 	Geometry::Square square(8);
 	/*cout << "Длина стороны квадрата: " << square.get_side() << endl;
 	cout << "Площадь квадрата: " << square.get_area() << endl;
@@ -152,4 +204,7 @@ void main()
 
 	Geometry::Rectangle rect(5, 12);
 	rect.info();
+
+	Geometry::Circle circle(500);
+	circle.info();
 }
