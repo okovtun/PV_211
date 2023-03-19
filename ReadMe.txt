@@ -3,6 +3,8 @@ https://www.youtube.com/watch?v=8WOtMA8pv4Y&list=PLeqyOOqxeiIMa-0fDCp-lpJ_qmDrZB
 
 TOREAD:
 https://en.cppreference.com/w/
+https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
+
 
 TODO:
 1. В иерархию геометрицеских фигур добавить иерархию Треугольников;
