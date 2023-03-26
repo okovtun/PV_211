@@ -219,10 +219,7 @@ template<typename T>T* push_back(T arr[], int& n, T value)
 template<typename T>T* push_front(T arr[], int& n, T value)
 {
 	T* buffer = new T[n + 1]{};
-	for (int i = 0; i < n; i++)
-	{
-		buffer[i + 1] = arr[i];
-	}
+	for (int i = 0; i < n; i++)	buffer[i + 1] = arr[i];
 	delete[] arr;
 	buffer[0] = value;
 	n++;
@@ -264,32 +261,23 @@ template<typename T>T* pop_front(T arr[], int& n)
 
 template<typename T>T** push_row_back(T** arr, int& rows, const int cols)
 {
-	T** buffer = new T*[rows + 1]{};
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
-	delete[] arr;
-	buffer[rows] = new T[cols] {};
-	rows++;
-	return buffer;
+	return push_back(arr, rows, new T[cols]{});
 }
 template<typename T>T** pop_row_back(T** arr, int& rows, const int cols)
 {
 	//1) Удаляем последнюю строку массива:
 	delete[] arr[rows - 1];
 	//2) Переопредляем массив указателей:
-	T** buffer = new T*[--rows]{};
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];
-	delete[] arr;
-	return buffer;
+	return pop_back(arr, rows);
 }
 
 template<typename T>void push_col_back(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols + 1]{};
-		for (int j = 0; j < cols; j++)buffer[j] = arr[i][j];
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = push_back(arr[i], cols, T());
+		cols--;
+		//T() - значение по умолчанию для шаблонного типа.
 	}
 	cols++;
 }
@@ -297,10 +285,8 @@ template<typename T>void pop_col_back(T** arr, const int rows, int& cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
-		T* buffer = new T[cols - 1]{};
-		for (int j = 0; j < cols - 1; j++)buffer[j] = arr[i][j];
-		delete[] arr[i];
-		arr[i] = buffer;
+		arr[i] = pop_back(arr[i], cols);
+		cols++;
 	}
 	cols--;
 }
