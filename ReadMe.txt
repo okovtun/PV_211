@@ -37,7 +37,7 @@ TODO:
 2. От веткти 'master' создать ветку 'DynamicMemoryTemplated', и в ней шаблонизировать 
    все функции для работы с массивами, кроме FillRand();
 
-3. От ветки 'DynamicMemoryTemplated' создать ветку 'DynamicOptimisation', и в ней 
+3. *** От ветки 'DynamicMemoryTemplated' создать ветку 'DynamicOptimisation', и в ней 
    оптимизировать все функции для работы с двумерными динамическими массивами.
 
 DONE:
