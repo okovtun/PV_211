@@ -31,7 +31,7 @@ void pop_col_back(int** arr, const int rows, int& cols);
 
 //#define POINTERS_AND_ARRAYS
 //#define DYNAMIC_MEMORY_1
-#define DYNAMIC_MEMORY_2
+//#define DYNAMIC_MEMORY_2
 
 void main()
 {
@@ -111,6 +111,16 @@ void main()
 	Clear(arr, rows);
 #endif // DYNAMIC_MEMORY_2
 
+	int n;
+	cout << "Введите размер массива: "; cin >> n;
+	int* arr = new int[n] {};
+
+	cout << "Маcсив создан, для добавления элемента нажмите любую клавишу..." << endl;
+	system("PAUSE");
+	arr = push_back(arr, n, 0);
+	cout << "Элемент добавлен" << endl;
+
+	delete[] arr;
 }
 
 int** Allocate(const int rows, const int cols)

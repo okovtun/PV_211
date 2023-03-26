@@ -6,6 +6,15 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
+В класс ForwardList добавить следующие методы:
+	??? push_back(???);
+	??? pop_front(???);
+	??? pop_back(???);
+
+	??? insert(???);	//вставляет значение в список по указанному индексу
+	??? erase(???);		//удаляет значение из списка по указанному индексу
+
+DONE:
 1. Добить все эти функции:
 В проект DataContainers добавить следующте функции:
 	??? push_front(???);	//добавляет значение в начало массива
