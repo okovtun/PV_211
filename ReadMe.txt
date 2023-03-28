@@ -6,10 +6,8 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
-Проверочный код должен заработать:
-
-	ForwardList list3 = list + list2;
-	list3.print();
+Проверочный код в секции OPERATOR_PLUS должен заработать:
+	https://github.com/okovtun/PV_211/blob/075a52ff5354e97614ef1ac78c6b4c2190bfe1c7/DataContainers/ForwardList/main.cpp#L173
 
 DONE:
 В класс ForwardList добавить следующие методы:
