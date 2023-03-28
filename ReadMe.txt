@@ -6,12 +6,18 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
-В класс ForwardList добавить следующие методы:
-	??? push_back(???);
-	??? pop_front(???);
-	??? pop_back(???);
+Проверочный код должен заработать:
 
-	??? insert(???);	//вставляет значение в список по указанному индексу
+	ForwardList list3 = list + list2;
+	list3.print();
+
+DONE:
+В класс ForwardList добавить следующие методы:
+	??? push_back(???);	DONE
+	??? pop_front(???);	DONE
+	??? pop_back(???);	DONE
+
+	??? insert(???);	//вставляет значение в список по указанному индексу	DONE
 	??? erase(???);		//удаляет значение из списка по указанному индексу
 
 DONE:
