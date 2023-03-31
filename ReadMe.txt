@@ -6,6 +6,12 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
+1. Функция void print(const ForwardList& list) должна заработать;
+2. Написать метод void reverse(), который меняет расположение 
+   элементов списка на противоположное, и применить этот метод в других методах 
+   для повышения производительности.
+
+DONE:
 Проверочный код в секции OPERATOR_PLUS должен заработать:
 	https://github.com/okovtun/PV_211/blob/075a52ff5354e97614ef1ac78c6b4c2190bfe1c7/DataContainers/ForwardList/main.cpp#L173
 
@@ -16,7 +22,7 @@ DONE:
 	??? pop_back(???);	DONE
 
 	??? insert(???);	//вставляет значение в список по указанному индексу	DONE
-	??? erase(???);		//удаляет значение из списка по указанному индексу
+	??? erase(???);		//удаляет значение из списка по указанному индексу	DONE
 
 DONE:
 1. Добить все эти функции:
