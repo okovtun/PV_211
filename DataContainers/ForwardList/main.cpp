@@ -1,5 +1,6 @@
 ﻿//ForwardList
 #include<iostream>
+#include<ctime>
 using namespace std;
 using std::cin;
 using std::cout;
@@ -17,20 +18,57 @@ public:
 	Element(int Data, Element* pNext = nullptr) :Data(Data), pNext(pNext)
 	{
 		count++;
+#ifdef DEBUG
 		cout << "EConstructor:\t" << this << endl;
+#endif // DEBUG
 	}
 	~Element()
 	{
 		count--;
+#ifdef DEBUG
 		cout << "EDestructor:\t" << this << endl;
+#endif // DEBUG
 	}
 	friend class ForwardList;
 	friend ForwardList operator+(const ForwardList& left, const ForwardList& right);
+	friend class ConstIterator;
 	friend class Iterator;
 };
 
 int Element::count = 0;	//Статическую переменную можно проинициализировать только за пределами класса
 
+class ConstIterator
+{
+	Element* Temp;
+public:
+	ConstIterator(Element* Temp) :Temp(Temp)
+	{
+		cout << "ItConstructor:\t" << this << endl;
+	}
+	~ConstIterator()
+	{
+		cout << "ItDestructor:\t" << this << endl;
+	}
+
+	ConstIterator& operator++()
+	{
+		Temp = Temp->pNext;
+		return *this;
+	}
+
+	bool operator==(const ConstIterator& other)const
+	{
+		return this->Temp == other.Temp;
+	}
+	bool operator!=(const ConstIterator& other)const
+	{
+		return this->Temp != other.Temp;
+	}
+	const int& operator*()const
+	{
+		return Temp->Data;
+	}
+};
 class Iterator
 {
 	Element* Temp;
@@ -64,6 +102,7 @@ public:
 	}
 };
 
+
 class ForwardList
 {
 	Element* Head;
@@ -77,6 +116,15 @@ public:
 	{
 		return nullptr;
 	}
+	ConstIterator begin()const
+	{
+		return Head;
+	}
+	ConstIterator end()const
+	{
+		return nullptr;
+	}
+
 	ForwardList()
 	{
 		Head = nullptr;	//Если список пуст, то его голова указывает на 0
@@ -113,7 +161,8 @@ public:
 		if (this == &other)return *this;
 		while (Head)pop_front();
 		for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)
-			push_back(Temp->Data);
+			push_front(Temp->Data);
+		reverse();
 		return *this;
 	}
 	ForwardList& operator=(ForwardList&& other)
@@ -220,6 +269,17 @@ public:
 	}
 
 	//				Methods:
+	void reverse()
+	{
+		ForwardList buffer;
+		while (Head)
+		{
+			buffer.push_front(Head->Data);
+			pop_front();
+		}
+		this->Head = buffer.Head;
+		buffer.Head = nullptr;
+	}
 	void print()const
 	{
 		/*
@@ -249,18 +309,19 @@ ForwardList operator+(const ForwardList& left, const ForwardList& right)
 
 void print(int arr[])
 {
-	cout << typeid(arr).name() << endl;
+	/*cout << typeid(arr).name() << endl;
 	cout << sizeof(arr) << endl;
 	for (int i : arr)
 	{
 		cout << i << tab;
 	}
-	cout << endl;
+	cout << endl;*/
 }
 void print(const ForwardList& list)
 {
-	for (int i : list)
+	for (const int& i : list)
 	{
+		//i *= 10;
 		cout << i << tab;
 	}
 	cout << endl;
@@ -269,6 +330,7 @@ void print(const ForwardList& list)
 //#define BASE_CHECK
 //#define OPERATOR_PLUS
 //#define RANGE_BASED_FOR_ARRAY
+//#define RANGE_BASED_FOR_LIST
 
 void main()
 {
@@ -348,11 +410,34 @@ void main()
 	print(arr);
 #endif // RANGE_BASE_FOR_ARRAY
 
+#ifdef RANGE_BASED_FOR_LIST
 	ForwardList list = { 3, 5, 8, 13, 21 };
-	//list.print();
-	for (int i : list)
+	/*for (int i : list)
 	{
+		//i *= 10;
 		cout << i << tab;
-	}
+	}*/
 	cout << endl;
+	print(list);
+	list.print();
+#endif // RANGE_BASED_FOR_LIST
+
+	int n;
+	cout << "Введите размер списка: "; cin >> n;
+	clock_t start = clock();
+	ForwardList list;
+	for (int i = 0; i < n; i++)
+	{
+		list.push_front(rand()%100);
+	}
+	clock_t end = clock();
+	double delta = double(end - start) / CLOCKS_PER_SEC;
+	cout << "Список заполнен за "<< delta << " секунд." << endl;
+	//list.print();
+	start = clock();
+	ForwardList list2 = list;
+	end = clock();
+	delta = double(end - start) / CLOCKS_PER_SEC;
+	cout << "Список скопирован за " << delta << " секунд." << endl;
+	//list2.print();
 }
