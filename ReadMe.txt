@@ -6,6 +6,9 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
+Вынести шаблонный список в отдельные файлы;
+
+DONE:
 1. Функция void print(const ForwardList& list) должна заработать;	DONE
 2. Написать метод void reverse(), который меняет расположение 
    элементов списка на противоположное, и применить этот метод в других методах 
