@@ -141,7 +141,7 @@ public:
 			push_back(*it);
 		}
 	}
-	ForwardList(const ForwardList& other):ForwardList()
+	ForwardList(const ForwardList& other) :ForwardList()
 	{
 		*this = other;
 	}
@@ -426,18 +426,21 @@ void main()
 	cout << "Введите размер списка: "; cin >> n;
 	clock_t start = clock();
 	ForwardList list;
+	time_t t_start = time(NULL);
 	for (int i = 0; i < n; i++)
 	{
-		list.push_front(rand()%100);
+		list.push_back(rand() % 100);
 	}
+	time_t t_end = time(NULL);
 	clock_t end = clock();
 	double delta = double(end - start) / CLOCKS_PER_SEC;
-	cout << "Список заполнен за "<< delta << " секунд." << endl;
+	cout << "Список заполнен за " << delta << " секунд." << endl;
+	cout << "Список заполнен за " << t_end - t_start << " секунд." << endl;
 	//list.print();
-	start = clock();
+	//start = clock();
 	ForwardList list2 = list;
-	end = clock();
-	delta = double(end - start) / CLOCKS_PER_SEC;
-	cout << "Список скопирован за " << delta << " секунд." << endl;
+	//end = clock();
+	//delta = double(end - start) / CLOCKS_PER_SEC;
+	//cout << "Список скопирован за " << delta << " секунд." << endl;
 	//list2.print();
 }

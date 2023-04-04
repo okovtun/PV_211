@@ -6,6 +6,17 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
+1. Написать метод void erase(), который удаляет значение из списка по указанному индексу;
+2. Оптимизировать методы добавления элементов;
+3. Проверочный код должен заработать:
+	List list = { 3, 5, 8, 13, 21 };
+	for(int i:list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+
+DONE:
 Вынести шаблонный список в отдельные файлы;
 
 DONE:
