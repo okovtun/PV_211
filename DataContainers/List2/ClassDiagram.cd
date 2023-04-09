@@ -13,7 +13,7 @@
           <NewMemberFileName>main.cpp</NewMemberFileName>
         </TypeIdentifier>
       </Class>
-      <Class Name="List::ConstBaseIterator">
+      <Class Name="List::ConstBaseIterator" Collapsed="true">
         <TypeIdentifier>
           <NewMemberFileName>main.cpp</NewMemberFileName>
         </TypeIdentifier>
