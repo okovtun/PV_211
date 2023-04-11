@@ -6,6 +6,10 @@ https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
 TODO:
+   Написать рекурсивную функцию ??? Fibonacci(???), которая выводит на экран 
+   ряд Фибоначчи до указанного предела.
+
+DONE:
 1. Написать проверочный код для всех итераторов;	DONE
 1. От ветки 'master' создать ветку 'TemplatedList2', и в ней шаблонизировать двусвязный список;
 2. От ветки 'TemplatedList2' создать ветку 'SeparatedList2', и в ней, 
