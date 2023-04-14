@@ -29,6 +29,27 @@ double power(double a, int n)
 	else return 1 / power(a, -n);*/
 	return n == 0 ? 1 : n > 0 ? a * power(a, n - 1) : 1 / power(a, -n);
 }
+/*void Fibonacci(int n, long long int a = 0, long long int b = 1)
+{
+	if (a >= n)return;
+	cout << a << "\t";
+	Fibonacci(n, b, a + b);
+}*/
+
+class Fibonacci
+{
+	static void sequence(int n, long long int a, long long int b)
+	{
+		if (a > n)return;
+		cout << a << "\t";
+		sequence(n, b, a + b);
+	}
+public:
+	static void sequence(int n)
+	{
+		sequence(n, 0, 1);
+	}
+};
 
 void main()
 {
@@ -42,11 +63,16 @@ void main()
 	cout << "¬ведите число: "; cin >> n;
 	cout << factorial(n) << endl;*/
 
-	int a;
+	/*int a;
 	int n;
 	cout << "¬ведите основание степени: "; cin >> a;
 	cout << "¬ведите показатель степени: "; cin >> n;
-	cout << a << " ^ " << n << " = " << power(a, n) << endl;
+	cout << a << " ^ " << n << " = " << power(a, n) << endl;*/
+
+	int n;
+	cout << "¬ведите предел: "; cin >> n;
+	//Fibonacci(n);
+	Fibonacci::sequence(n);
 
 	//main();
 }
