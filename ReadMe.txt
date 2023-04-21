@@ -5,6 +5,23 @@ TOREAD:
 https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
+Music:
+https://www.youtube.com/watch?v=20WRoTJJ5Ko
+https://www.youtube.com/watch?v=78PNadGEeTs
+https://www.youtube.com/watch?v=kliQ417Isww&t=1s
+https://www.youtube.com/watch?v=t7LwjGqFKXA
+https://www.youtube.com/watch?v=0LXVoMc8n3g
+https://www.youtube.com/watch?v=78kgGKRS2rw
+https://www.youtube.com/watch?v=4jH3Z0sZ6X4
+https://www.youtube.com/watch?v=ZPzsx3AdHpw
+https://www.youtube.com/watch?v=lMGo-9tKb90&pp=ygUNU2h5bG1hZ29naG5hcg%3D%3D
+https://www.youtube.com/watch?v=z0EY-vQXRwc
+https://www.youtube.com/watch?v=iQVei5C2N4E
+https://www.youtube.com/watch?v=L-iepu3EtyE
+https://www.youtube.com/watch?v=067YF8KHdTM
+https://www.youtube.com/watch?v=55XlIPzY5q0
+https://www.youtube.com/watch?v=90U0BOsRXmc&list=PLZdnecLhElmsCpyKzev8QlIKTRcLqKnKR
+
 TODO:
 1. Вывести дерево в виде дерева;
 2. Написать метод balance(), который балансирует Бинарное дерево;
