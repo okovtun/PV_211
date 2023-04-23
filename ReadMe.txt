@@ -5,6 +5,14 @@ TOREAD:
 https://en.cppreference.com/w/
 https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sharing
 
+TOREAD:
+https://legacy.cplusplus.com/reference/stl/
+
+TODO:
+1. Добавить значение в вектор по заданному индексу;
+2. Удалить значение из вектора по указанному индексу;
+	https://legacy.cplusplus.com/reference/vector/vector/
+
 Music:
 https://www.youtube.com/watch?v=20WRoTJJ5Ko
 https://www.youtube.com/watch?v=78PNadGEeTs
