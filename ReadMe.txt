@@ -9,6 +9,10 @@ TOREAD:
 https://legacy.cplusplus.com/reference/stl/
 
 TODO:
+1. Добавить значение по указанному индексу в контейнеры std::list и std::forward_list;
+2. База данных ГАИ;
+
+DONE:
 1. Добавить значение в вектор по заданному индексу;
 2. Удалить значение из вектора по указанному индексу;
 	https://legacy.cplusplus.com/reference/vector/vector/

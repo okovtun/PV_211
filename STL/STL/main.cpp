@@ -2,6 +2,7 @@
 #include<iostream>
 #include<array>
 #include<vector>
+#include<deque>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -10,7 +11,8 @@ using std::endl;
 #define delimiter "\n-------------------------------------------------\n"
 
 //#define STL_ARRAY
-#define STL_VECTOR
+//#define STL_VECTOR
+#define STL_DEQUE
 
 template<typename T>void vector_properties(const std::vector<T>& vec);
 
@@ -30,15 +32,24 @@ void main()
 #ifdef STL_VECTOR
 	//vector - это контейнер, который хранит данные в виде динамического массива.
 	std::vector<int> vec = { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
-	for (int i = 0; i < vec.size(); i++)
+	try
 	{
-		cout << vec[i] << tab;
+		for (int i = 0; i < vec.size() * 2; i++)
+		{
+			cout << vec[i] << tab;
+			//cout << vec.at(i) << tab;
+		}
+		cout << endl;
 	}
-	cout << endl;
+	catch (const std::exception& e)
+	{
+		std::cerr << endl  << e.what() << endl;
+	}
 	vector_properties(vec);
 	//vec.push_back(134);
 	//vec.reserve(25);
-	vec.resize(17);
+	//vec.resize(17);
+	vec.insert(vec.begin() + 3, { 1024, 2048, 3072, 4096 });
 	for (std::vector<int>::iterator it = vec.begin(); it != vec.end(); ++it)
 	{
 		cout << *it << tab;
@@ -58,6 +69,11 @@ void main()
 	vec2.shrink_to_fit();
 	vector_properties(vec2);
 #endif // STL_VECTOR
+
+#ifdef STL_DEQUE
+	//deque - это контейнер, который хранит данные в виде набора одномерных динамических массивов.
+	//Этот контейнер позволяет добавлять элементы как в начало так и в конец за константное время
+#endif // STL_DEQUE
 
 }
 
