@@ -34,6 +34,10 @@ https://www.youtube.com/watch?v=067YF8KHdTM
 https://www.youtube.com/watch?v=55XlIPzY5q0
 https://www.youtube.com/watch?v=90U0BOsRXmc&list=PLZdnecLhElmsCpyKzev8QlIKTRcLqKnKR
 
+Pain:
+https://www.youtube.com/watch?v=eB_3JIN5Vso&list=PLfzs8elh7lSz__s7u2vzCmbsOl_HNOtMZ
+https://www.youtube.com/watch?v=fHsJJVe8UHE&list=PLMAVATSiJAfky61_OOzVTeAthNZZTmhbG
+
 TODO:
 1. Вывести дерево в виде дерева;
 2. Написать метод balance(), который балансирует Бинарное дерево;
