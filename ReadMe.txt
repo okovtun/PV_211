@@ -9,6 +9,9 @@ TOREAD:
 https://legacy.cplusplus.com/reference/stl/
 
 TODO:
+Прочитать базу из файла;
+
+DONE:
 1. Добавить значение по указанному индексу в контейнеры std::list и std::forward_list;
 2. База данных ГАИ;
 
