@@ -8,11 +8,13 @@ https://drive.google.com/drive/folders/1mIhAKMp5-Jpy6s5X8u924tRCXFEdHE_z?usp=sha
 TOREAD:
 https://legacy.cplusplus.com/reference/stl/
 
-TODO:
+https://www.qt.io/
+
+DONE:
 https://www.codewars.com/kata/578b4f9b7c77f535fc00002f
 https://www.codewars.com/kata/578df8f3deaed98fcf0001e9
 
-TODO:
+DONE:
 Завести машину, и обеспечить сжигание топлива двигаталем каждую секунду.
 
 DONE:
