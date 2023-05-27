@@ -312,14 +312,14 @@ void main()
 		cout << "Введите уровень топлива: "; cin >> fuel;
 		tank.fill(fuel);
 		tank.info();
-} while (fuel);
+	} while (fuel);
 #endif // TANK_CHECK
 
 #ifdef ENGINE_CHECK
-Engine engine(8);
-engine.info();
+	Engine engine(8);
+	engine.info();
 #endif // ENGINE_CHECK
 
-Car mustang(10, 80, 250);
-mustang.control();
+	Car mustang(10, 80, 250);
+	mustang.control();
 }
