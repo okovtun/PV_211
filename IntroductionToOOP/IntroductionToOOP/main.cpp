@@ -224,8 +224,10 @@ void main()
 
 	Point A(2, 3);	A.print();
 	Point B(4, 5);	B.print();
-	Point C = A + B;C.print();
-	C++; C.print();
+	//Point C = A + B;C.print();
+	//C++; C.print();
+	Point C = A;
+	C.print();
 }
 
 /*
