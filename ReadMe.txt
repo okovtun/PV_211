@@ -19,6 +19,7 @@ https://github.com/okovtun/PV_224
 ------------------------------------------------------------------------------------
 GRUB4DOS:
 https://www.youtube.com/watch?v=AekRyfzRy9w&list=PLeqyOOqxeiINK1krBBk-nu_z52oubMPrO
+http://unattendedxp.com/articles/vista-unattended/autounattend.shtml
 ------------------------------------------------------------------------------------
 
 DONE:
