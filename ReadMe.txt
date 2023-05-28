@@ -13,10 +13,13 @@ https://www.youtube.com/watch?v=6KtOzh0StTc&list=PL2D1942A4688E9D63
 https://www.youtube.com/watch?v=nscgFv4l53w&list=PLUbFnGajtZlXbrbdlraCe3LMC_YH5abao
 https://www.youtube.com/@ProgrammingLiftoff/playlists
 
-
-Repos:
+WinAPI:
 https://github.com/okovtun/SPD_121
 https://github.com/okovtun/PV_224
+------------------------------------------------------------------------------------
+GRUB4DOS:
+https://www.youtube.com/watch?v=AekRyfzRy9w&list=PLeqyOOqxeiINK1krBBk-nu_z52oubMPrO
+------------------------------------------------------------------------------------
 
 DONE:
 https://www.codewars.com/kata/578b4f9b7c77f535fc00002f
