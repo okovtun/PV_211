@@ -366,6 +366,7 @@ void main()
 #endif // DEPTH_CHECK
 
 	Tree tree = { 55, 34, 21, 13, 8, 5, 3 };
+	tree.tree_print();
 	tree.balance(tree.getRoot());
 	tree.tree_print();
 	tree.print();

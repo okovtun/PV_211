@@ -25,8 +25,8 @@ namespace Geometry
 		yellow = 0x00FFFF,
 		white = 0x00FFFFFF
 	};
-#define SHAPE_TAKE_PARAMETERS int start_x, int start_y, int line_width, Color color
-#define SHAPE_GIVE_PARAMETERS start_x, start_y, line_width, color
+#define SHAPE_TAKE_PARAMETERS int start_x, int start_y, int line_width, Color color//, WINGDIAPI BOOL* WINAPI lpfndrw
+#define SHAPE_GIVE_PARAMETERS start_x, start_y, line_width, color//, lpfndrw
 	class Shape
 	{
 	protected:
@@ -34,12 +34,14 @@ namespace Geometry
 		int start_y;
 		int line_width;
 		Color color;
+		WINGDIAPI BOOL* WINAPI lpfndrw(HDC, int, int, int, int);
 	public:
-		Shape(SHAPE_TAKE_PARAMETERS) :color(color)
+		Shape(SHAPE_TAKE_PARAMETERS, WINGDIAPI BOOL* WINAPI lpfndrw) :color(color)//, lpfndrw(lpfndrw)
 		{
 			set_start_x(start_x);
 			set_start_y(start_y);
 			set_line_width(line_width);
+			this->lpfndrw = lpfndrw;
 		}
 		virtual ~Shape() {}
 		int get_start_x()const
@@ -75,7 +77,24 @@ namespace Geometry
 
 		virtual double get_area()const = 0;
 		virtual double get_perimeter()const = 0;
-		virtual void draw()const = 0;
+		virtual void draw()const
+		{
+			HWND hwnd = GetConsoleWindow();
+			HDC hdc = GetDC(hwnd);
+			HPEN hPen = CreatePen(PS_SOLID, line_width, color);	//Карандаш рисует контур фигуры
+			HBRUSH hBrush = CreateSolidBrush(color);
+
+			SelectObject(hdc, hPen);
+			SelectObject(hdc, hBrush);
+
+			//lpfndrw(hdc, start_x, start_y, start_x + width, start_y + length);
+			//::Rectangle(hdc, start_x, start_y, start_x + width, start_y + length);
+
+			DeleteObject(hBrush);
+			DeleteObject(hPen);
+
+			ReleaseDC(hwnd, hdc);
+		}
 		virtual void info()const
 		{
 			cout << "Площадь фигуры: " << get_area() << endl;
@@ -136,7 +155,7 @@ namespace Geometry
 		double length;
 		double width;
 	public:
-		Rectangle(double width, double length, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS)
+		Rectangle(double width, double length, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS, ::Rectangle)
 		{
 			set_width(width);
 			set_length(length);
@@ -213,7 +232,7 @@ namespace Geometry
 	{
 		double radius;
 	public:
-		Circle(double radius, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS)
+		Circle(double radius, SHAPE_TAKE_PARAMETERS) :Shape(SHAPE_GIVE_PARAMETERS, ::Ellipse)
 		{
 			set_radius(radius);
 		}
@@ -418,22 +437,22 @@ void main()
 	COORD coord;
 	SetConsoleDisplayMode(hConsole, CONSOLE_FULLSCREEN_MODE, &coord);
 
-	Geometry::Square square(100, 400, 50, 5, Geometry::Color::blue);
+	//Geometry::Square square(100, 400, 50, 5, Geometry::Color::blue);
 	/*cout << "Длина стороны квадрата: " << square.get_side() << endl;
 	cout << "Площадь квадрата: " << square.get_area() << endl;
 	cout << "Периметр квадрата: " << square.get_perimeter() << endl;;
 	square.draw();*/
-	square.info();
+	//square.info();
 
 	Geometry::Rectangle rect(150, 77, 200, 100, 5, Geometry::Color::red);
 	rect.info();
 
-	Geometry::Circle circle(500, 500, 300, 5, Geometry::Color::yellow);
-	circle.info();
-
-	Geometry::EquilateralTriangle eq_triangle(250, 700, 50, 25, Geometry::Color::green);
-	eq_triangle.info();
-
-	Geometry::RightTrinagle r_tri(150, 50, 850, 50, 5, Geometry::Color::white);
-	r_tri.info();
+	//Geometry::Circle circle(500, 500, 300, 5, Geometry::Color::yellow);
+	//circle.info();
+	//
+	//Geometry::EquilateralTriangle eq_triangle(250, 700, 50, 25, Geometry::Color::green);
+	//eq_triangle.info();
+	//
+	//Geometry::RightTrinagle r_tri(150, 50, 850, 50, 5, Geometry::Color::white);
+	//r_tri.info();
 }
