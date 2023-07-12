@@ -6,9 +6,30 @@ CONST CHAR g_sz_LOGIN_INVITE[] = "Введите имя пользователя
 //sz_ - String Zero (NULL Terminated Line)
 
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+/*
+----------------------------------------------------------------
+HWND hwnd - Handler To Window (Обработчик окна). Обратиться к окну можно только через его обработчик (Handler)
+UINT uMsg - Сообщение
+WPARAM wParam, LPARAM lParam - параметры сообщения, зависят от самого сообщения.
+----------------------------------------------------------------
+*/
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
 {
+	/*
+	----------------------------------------------------------------
+	HINSTANCE hInstance - это экземпляр запущенного *.exe-файла нашей программы
+	hInstance запущенной программы всегда можно получить при промрощи функции GetModuleHandle(NULL);
+
+	HINSTANCE hPrefInst - это экземпляр редыдущего запущенного *.exe-файла
+	
+	LPSTR lpCmdLine:
+	LPSTR - Long Pointer to String
+	lpCmdLine - командная строка приложения, через которую можно определить параметры запуска приложения
+
+	INT nCmdShow - определяет режим отображения окна, например, свернуто в окно, развернуто на весь экран, свернуто на панель задач.
+	----------------------------------------------------------------
+	*/
 	//MessageBox(NULL, "Привет Мир! Я окно сообщения :-)", "Info", MB_YESNOCANCEL | MB_ICONINFORMATION);
 
 	DialogBoxParam(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), 0, DlgProc, 0);
@@ -32,6 +53,25 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:	//Обрабатываем команды нажатия на кнопки, наведение мыши........
 		switch (LOWORD(wParam))
 		{
+		case IDC_EDIT_LOGIN:
+		{
+			HWND hEditLogin = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
+			CONST INT SIZE = 256;
+			CHAR sz_buffer[SIZE] = {};
+			SendMessage(hEditLogin, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
+
+			if (HIWORD(wParam) == EN_SETFOCUS)
+			{
+				if (strcmp(sz_buffer, g_sz_LOGIN_INVITE) == 0)
+					SendMessage(hEditLogin, WM_SETTEXT, 0, (LPARAM)"");
+			}
+			if (HIWORD(wParam) == EN_KILLFOCUS)
+			{
+				if (strlen(sz_buffer) == 0)
+					SendMessage(hEditLogin, WM_SETTEXT, 0, (LPARAM)g_sz_LOGIN_INVITE);
+			}
+		}
+		break;
 		case IDC_BUTTON_COPY:
 		{
 			//
