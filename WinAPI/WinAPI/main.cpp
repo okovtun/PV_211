@@ -1,6 +1,10 @@
 ﻿#include<Windows.h>
 #include"resource.h"
 
+CONST CHAR g_sz_LOGIN_INVITE[] = "Введите имя пользователя";
+//g_ - Global;
+//sz_ - String Zero (NULL Terminated Line)
+
 BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, INT nCmdShow)
@@ -20,6 +24,9 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON1));
 		SendMessage(hwnd, WM_SETICON, 0, (LPARAM)hIcon);
+
+		HWND hLogin = GetDlgItem(hwnd, IDC_EDIT_LOGIN);
+		SendMessage(hLogin, WM_SETTEXT, 0, (LPARAM)g_sz_LOGIN_INVITE);
 	}
 	break;
 	case WM_COMMAND:	//Обрабатываем команды нажатия на кнопки, наведение мыши........
