@@ -38,7 +38,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			CONST INT SIZE = 256;
 			CHAR sz_buffer[SIZE]{};
 			SendMessage(hCombo, CB_GETLBTEXT, i, (LPARAM)sz_buffer);
-			CHAR sz_message[SIZE] = {}; ;
+			CHAR sz_message[SIZE] = {};
 			sprintf(sz_message, "Вы выбрали элемент № %i, со значением \"%s\"", i, sz_buffer);
 			MessageBox(hwnd, sz_message, "Info", MB_OK | MB_ICONINFORMATION);
 		}
