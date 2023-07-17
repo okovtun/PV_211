@@ -79,7 +79,10 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT_ADD), WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
 			HWND hParent = GetParent(hwnd);	//Получаем родительское окно
 			HWND hList = GetDlgItem(hParent, IDC_LIST1);
-			SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)sz_buffer);
+			if (SendMessage(hList, LB_FINDSTRING, 0, (LPARAM)sz_buffer) == LB_ERR)
+				SendMessage(hList, LB_ADDSTRING, 0, (LPARAM)sz_buffer);
+			else
+				MessageBox(hwnd, "Такая запись уже существует", "Info", MB_OK | MB_ICONINFORMATION);
 		}
 		//break;
 		case IDCANCEL:EndDialog(hwnd, 0);
