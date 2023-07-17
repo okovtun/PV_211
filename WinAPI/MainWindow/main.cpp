@@ -1,4 +1,5 @@
 ﻿#include<Windows.h>
+#include"resource.h"
 
 CONST CHAR g_sz_MY_WINDOW_CLASS[] = "MyFirstWindow";
 
@@ -13,11 +14,16 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 	wc.cbSize = sizeof(wc);	//Размер класса в Байтах (cb - Count Bytes)
 	wc.cbClsExtra = 0;		//Class ExtraBytes дополнительные Байты класса
 	wc.cbWndExtra = 0;		//WindowExtraBytes дополнительные Байты окна
-	wc.style = 0;			
+	wc.style = 0;
 
-	wc.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
-	wc.hIconSm = LoadIcon(hInstance, IDI_APPLICATION);
-	wc.hCursor = LoadCursor(hInstance, IDC_ARROW);
+	//wc.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON_PALM));		//Отображается в панели задач
+	//wc.hIconSm = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON_STAR));	//Отображается в заголовке окна
+
+	wc.hIcon = (HICON)LoadImage(hInstance, "palm.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+	wc.hIconSm = (HICON)LoadImage(hInstance, "star.ico", IMAGE_ICON, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+
+	wc.hCursor = (HCURSOR)LoadImage(hInstance, "starcraft_background.ani", IMAGE_CURSOR, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
+
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
 
 	wc.hInstance = hInstance;
@@ -52,14 +58,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		MessageBox(NULL, "Окно небыло создано", "Error", MB_OK | MB_ICONERROR);
 		return 0;
 	}
-	
+	ShowWindow(hwnd, nCmdShow);	//задает режим отображения окна
+	UpdateWindow(hwnd);	//Выполняет прорисовку окна
 
 	//3) Запуск цикла сообщений
 	MSG msg;
-	while (GetMessage(&msg, NULL, 0, 0) > 0)
+	while (GetMessage(&msg, 0, 0, 0) > 0)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		TranslateMessage(&msg);	//Транслирует сообщения виртуальных клавиш в символные сообщения
+		DispatchMessage(&msg);	//Отправляет сообщение процедуре окна. Сообщение берет от GetMessage();
 	}
 
 	return msg.wParam;
@@ -74,7 +81,11 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 		break;
 	case WM_DESTROY: PostQuitMessage(0); break;
-	case WM_CLOSE:	DestroyWindow(hwnd); break;
+	case WM_CLOSE:
+		if (MessageBox(hwnd, "Вы действительно хотите закрыть окно?", "Question", MB_YESNO | MB_ICONQUESTION) == IDYES)
+			DestroyWindow(hwnd); //Функция DestroyWindow() уничтожает окно
+			//Конкретно здесь, функция DestroyWindow() посылает окну вообщение WM_DESTROY
+		break;
 	default: return DefWindowProc(hwnd, uMsg, wParam, lParam);
 	}
 	return 0;
