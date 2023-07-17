@@ -76,6 +76,7 @@ BOOL CALLBACK DlgProcAdd(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			CONST INT SIZE = 256;
 			CHAR sz_buffer[SIZE] = {};
+			if (SendMessage(GetDlgItem(hwnd, IDC_EDIT_ADD), WM_GETTEXTLENGTH, 0, 0) == 0)break;
 			SendMessage(GetDlgItem(hwnd, IDC_EDIT_ADD), WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
 			HWND hParent = GetParent(hwnd);	//Получаем родительское окно
 			HWND hList = GetDlgItem(hParent, IDC_LIST1);
