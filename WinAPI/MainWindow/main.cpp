@@ -4,6 +4,13 @@
 #include"resource.h"
 
 CONST CHAR g_sz_MY_WINDOW_CLASS[] = "MyFirstWindow";
+//g_ - Global, i - Int 
+CONST INT g_i_BTN_SIZE = 50;	//размер кнопки
+CONST INT g_i_DISTANCE = 10;	//Расстояние между кнопками
+CONST INT g_i_START_X = 10;	//Отступ от начала окна
+CONST INT g_i_START_Y = 10;	//Отступ от начала окна
+CONST INT g_i_DISPLAY_WIDTH = (g_i_BTN_SIZE + g_i_DISTANCE) * 5;
+CONST INT g_i_DISPLAY_HEIGHT = 18;
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -88,7 +95,44 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	switch (uMsg)
 	{
 	case WM_CREATE:
-		break;
+	{
+		HWND hEdit = CreateWindowEx
+		(
+			NULL, //exStyle
+			"Edit",
+			"0",
+			WS_CHILD | WS_VISIBLE | ES_RIGHT | WS_BORDER,
+			g_i_START_X, g_i_START_Y,
+			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
+			hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL
+		);
+		CHAR sz_btn_name[] = "0";
+		INT number = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				//https://learn.microsoft.com/en-us/windows/win32/controls/button-styles
+				sz_btn_name[0] = number + 49;
+				CreateWindowEx
+				(
+					NULL,
+					"Button",
+					sz_btn_name,
+					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+					g_i_START_X + g_i_DISTANCE + (g_i_BTN_SIZE + g_i_DISTANCE)*j,
+					g_i_START_Y + g_i_DISTANCE + (g_i_BTN_SIZE + g_i_DISTANCE)*(2 - i) + g_i_DISPLAY_HEIGHT,
+					g_i_BTN_SIZE, g_i_BTN_SIZE,
+					hwnd,
+					(HMENU)(number + 1000),
+					GetModuleHandle(NULL),
+					NULL
+				);
+				number++;
+			}
+		}
+	}
+	break;
 	case WM_SIZE:
 	case WM_MOVE:
 	{
