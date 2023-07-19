@@ -1,4 +1,6 @@
-﻿#include<Windows.h>
+﻿#define _CRT_SECURE_NO_WARNINGS
+#include<Windows.h>
+#include<cstdio>
 #include"resource.h"
 
 CONST CHAR g_sz_MY_WINDOW_CLASS[] = "MyFirstWindow";
@@ -39,6 +41,15 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 	//2) Создание окна
 
+	INT screen_width = GetSystemMetrics(SM_CXSCREEN);
+	INT screen_height = GetSystemMetrics(SM_CYSCREEN);
+
+	INT window_width = screen_width * 3 / 4;
+	INT window_height = screen_height * 3 / 4;
+
+	INT start_x = screen_width / 8;
+	INT start_y = screen_height / 8;
+
 	HWND hwnd = CreateWindowEx
 	(
 		0,
@@ -46,8 +57,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 		g_sz_MY_WINDOW_CLASS,	//Заголовок окна
 		WS_OVERLAPPEDWINDOW,	//Стриль окна для главного окна программы всегда быдет WS_OVERLAPPEDWINDOW
 								//WS_OVERLAPPEDWINDOW - это окно верхнего уровня (TOP_LEVEL_WINDOW), которое включает в себя дочерние окна (CHILDWINDOW)
-		CW_USEDEFAULT, CW_USEDEFAULT,	//Начальная позиция окна
-		CW_USEDEFAULT, CW_USEDEFAULT,	//Размер окна
+		start_x, start_y,		//Начальная позиция окна
+		window_width, window_height,	//Размер окна
 		NULL,	//Parent Window
 		NULL,	//Для главного окна это меню, для дочернего окна это ID его ресурса (IDC_EDIT)
 		hInstance,
@@ -78,6 +89,25 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_CREATE:
 		break;
+	case WM_SIZE:
+	case WM_MOVE:
+	{
+		RECT rect;	//Прямоугольник
+		GetWindowRect(hwnd, &rect);	//Получаем прямоугольник окна
+		//&rect - взятие адреса в памяти 'rect'
+
+		//INT start_x = rect.left;
+		//INT start_y = rect.top;
+		INT width = rect.right - rect.left;
+		INT height = rect.bottom - rect.top;
+
+		CONST INT SIZE = 256;
+		CHAR sz_buffer[SIZE] = "Have a nive day";
+
+		sprintf(sz_buffer, "%s, Size: %ix%i, Position: %ix%i", g_sz_MY_WINDOW_CLASS, width, height, rect.left, rect.top);
+		SendMessage(hwnd, WM_SETTEXT, 0, (LPARAM)sz_buffer);
+	}
+	break;
 	case WM_COMMAND:
 		break;
 	case WM_DESTROY: PostQuitMessage(0); break;
