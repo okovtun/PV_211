@@ -2,6 +2,8 @@
 #include<Windows.h>
 #include<cstdio>
 #include"resource.h"
+//#include"resource1.h"
+//#include"Icons.h"
 
 CONST CHAR g_sz_MY_WINDOW_CLASS[] = "MyFirstWindow";
 //g_ - Global, i - Int 
@@ -131,6 +133,24 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				number++;
 			}
 		}
+		HWND hEqual = CreateWindowEx
+		(
+			NULL,
+			"Button",
+			"=",
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_ICON,
+			g_i_START_X + g_i_DISTANCE + (g_i_BTN_SIZE + g_i_DISTANCE)*4,
+			g_i_START_Y + g_i_DISTANCE + (g_i_BTN_SIZE + g_i_DISTANCE)*2 + g_i_DISPLAY_HEIGHT,
+			g_i_BTN_SIZE, g_i_BTN_SIZE,
+			hwnd,
+			(HMENU)(IDC_BUTTON_EQUAL),
+			GetModuleHandle(NULL),
+			NULL
+		);
+		HICON hEqualIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON_STAR));
+		//HICON hEqualIcon = (HICON)LoadImage(GetModuleHandle(NULL), "star.ico", IMAGE_ICON, LR_DEFAULTSIZE,LR_DEFAULTSIZE,LR_LOADFROMFILE);
+		SendMessage(hEqual, BM_SETIMAGE, (WPARAM)IMAGE_ICON, (LPARAM)hEqualIcon);
+		//https://www.codeproject.com/Questions/591035/HowpluscanplusIpluscreateplusplusbuttonplusshowing
 	}
 	break;
 	case WM_SIZE:

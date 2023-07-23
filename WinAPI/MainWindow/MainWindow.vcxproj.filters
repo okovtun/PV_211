@@ -36,7 +36,7 @@
     <Image Include="star.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="icon1.ico">
+    <Image Include="icon_equal.ico">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

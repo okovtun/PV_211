@@ -152,7 +152,7 @@
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico" />
+    <Image Include="icon_equal.ico" />
     <Image Include="palm.ico" />
     <Image Include="star.ico" />
   </ItemGroup>

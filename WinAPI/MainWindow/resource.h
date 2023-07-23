@@ -7,6 +7,7 @@
 #define IDC_CURSOR1                     103
 #define IDI_ICON1                       104
 #define IDC_EDIT                        999
+
 #define IDC_BUTTON_0                    1000
 #define IDC_BUTTON_1                    1001
 #define IDC_BUTTON_2                    1002
@@ -17,7 +18,9 @@
 #define IDC_BUTTON_7                    1007
 #define IDC_BUTTON_8                    1008
 #define IDC_BUTTON_9                    1009
+
 #define IDC_BUTTON_POINT                1010
+
 #define IDC_BUTTON_PLUS                 1011
 #define IDC_BUTTON_MINUS                1012
 #define IDC_BUTTON_ASTER                1013
