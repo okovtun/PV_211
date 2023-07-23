@@ -313,6 +313,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
 			if(input)b = strtod(sz_buffer, NULL);
+			input = false;
 			switch (operation)
 			{
 			case '+': a += b; break;
