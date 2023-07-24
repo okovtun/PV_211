@@ -252,12 +252,14 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
 		CHAR sz_digit[2] = {};
 		static double a = 0;
-		double b = 0;
+		static double b = 0;
 		static bool stored = false;
+		static bool input = false;
 		static char operation = 0;
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
-			if (stored && operation != 0)
+			input = true;
+			if (stored)
 			{
 				SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"");
 				stored = false;
@@ -289,12 +291,12 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			b = strtod(sz_buffer, NULL);
+			if(input)b = strtod(sz_buffer, NULL);
 			if (a == 0)
-			{
 				a = b;
-				break;
-			}
+			stored = true;
+			input = false;
+			SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0);
 			switch (LOWORD(wParam))
 			{
 			case IDC_BUTTON_PLUS:	operation = '+'; break;
@@ -302,10 +304,13 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			case IDC_BUTTON_ASTER:	operation = '*'; break;
 			case IDC_BUTTON_SLASH:	operation = '/'; break;
 			}
-			stored = true;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
+			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
+			if(input)
+				b = strtod(sz_buffer, NULL);
+			input = false;
 			switch (operation)
 			{
 			case '+': a += b; break;
