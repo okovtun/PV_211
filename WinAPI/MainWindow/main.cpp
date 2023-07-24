@@ -5,8 +5,8 @@
 
 CONST CHAR g_sz_MY_WINDOW_CLASS[] = "MyFirstWindow";
 //g_ - Global, i - Int 
-CONST INT g_i_BTN_SIZE = 50;	//размер кнопки
-CONST INT g_i_DISTANCE = 10;	//Расстояние между кнопками
+CONST INT g_i_BTN_SIZE = 64;	//размер кнопки
+CONST INT g_i_DISTANCE = 5;	//Расстояние между кнопками
 CONST INT g_i_START_X = 10;	//Отступ от начала окна
 CONST INT g_i_START_Y = 10;	//Отступ от начала окна
 CONST INT g_i_DISPLAY_WIDTH = (g_i_BTN_SIZE * 5 + g_i_DISTANCE * 4);
@@ -209,10 +209,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hwnd, (HMENU)IDC_BUTTON_CLEAR,
 			GetModuleHandle(NULL), NULL
 		);
-		CreateWindowEx
+		HWND hEqualBtn = CreateWindowEx
 		(
 			NULL, "Button", "=",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_ICON,
 
 			g_i_START_X + (g_i_BTN_SIZE + g_i_DISTANCE) * 4,
 			g_i_START_Y + g_i_DISPLAY_HEIGHT + g_i_DISTANCE * 3 + g_i_BTN_SIZE * 2,
@@ -223,7 +223,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hwnd, (HMENU)IDC_BUTTON_EQUAL,
 			GetModuleHandle(NULL), NULL
 		);
-
+		HICON hIcon = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON_STAR));
+		SendMessage(hEqualBtn, BM_SETIMAGE, (WPARAM)IMAGE_ICON, (LPARAM)hIcon);
+		//https://www.codeproject.com/Questions/591035/HowpluscanplusIpluscreateplusplusbuttonplusshowing
 	}
 	break;
 	case WM_SIZE:
