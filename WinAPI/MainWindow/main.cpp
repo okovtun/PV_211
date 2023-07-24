@@ -104,7 +104,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL, //exStyle
 			"Edit",
 			"0",
-			WS_CHILD | WS_VISIBLE | ES_RIGHT | WS_BORDER,
+			WS_CHILD | WS_VISIBLE  | WS_BORDER | ES_RIGHT | ES_READONLY,
 			g_i_START_X, g_i_START_Y,
 			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
 			hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL
@@ -255,7 +255,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		static double b = 0;
 		static bool stored = false;
 		static bool input = false;
+		static bool operation_changed = false;
 		static char operation = 0;
+		static char old_operation = 0;
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
 			input = true;
@@ -291,12 +293,16 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			if(input)b = strtod(sz_buffer, NULL);
+			if (input)b = strtod(sz_buffer, NULL);
 			if (a == 0)
 				a = b;
 			stored = true;
 			input = false;
-			SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0);
+			if (operation == old_operation && operation_changed)
+			{
+				SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0);
+				//operation_changed = false;
+			}
 			switch (LOWORD(wParam))
 			{
 			case IDC_BUTTON_PLUS:	operation = '+'; break;
@@ -304,11 +310,12 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			case IDC_BUTTON_ASTER:	operation = '*'; break;
 			case IDC_BUTTON_SLASH:	operation = '/'; break;
 			}
+			operation_changed = true;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
 			SendMessage(hEdit, WM_GETTEXT, SIZE, (LPARAM)sz_buffer);
-			if(input)
+			if (input)
 				b = strtod(sz_buffer, NULL);
 			input = false;
 			switch (operation)
@@ -318,9 +325,31 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			case '*': a *= b; break;
 			case '/': a /= b; break;
 			}
+			//old_operation = operation;
+			operation_changed = false;
 			sprintf(sz_buffer, "%g", a);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_buffer);
 		}
+	}
+	break;
+	case WM_KEYDOWN:
+	{
+		switch (wParam)
+		{
+		case VK_OEM_PLUS:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_PLUS, 0);  break;
+		case VK_OEM_MINUS:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_MINUS, 0); break;
+		case VK_MULTIPLY:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0); break;
+		case VK_DIVIDE:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_SLASH, 0); break;
+		case VK_RETURN:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0); break;
+		}
+
+		if (wParam == VK_OEM_PERIOD)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_POINT, 0);
+
+		if (wParam >= 0x30 && wParam <= 0x39)
+		{
+			SendMessage(hwnd, WM_COMMAND, wParam - 0x30 + 1000, 0);
+		}
+
 	}
 	break;
 	case WM_DESTROY: PostQuitMessage(0); break;
