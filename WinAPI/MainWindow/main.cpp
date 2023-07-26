@@ -255,7 +255,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		static double b = 0;
 		static bool stored = false;
 		static bool input = false;
-		static bool operation_changed = false;
+		static bool operation_input = false;
 		static char operation = 0;
 		static char old_operation = 0;
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
@@ -289,6 +289,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"0");
 			a = 0;
 			stored = false;
+			input = false;
+			operation_input = false;
 		}
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
@@ -298,10 +300,9 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 				a = b;
 			stored = true;
 			input = false;
-			if (operation == old_operation && operation_changed)
+			if (/*operation == old_operation &&*/ operation_input)
 			{
 				SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0);
-				//operation_changed = false;
 			}
 			switch (LOWORD(wParam))
 			{
@@ -310,7 +311,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			case IDC_BUTTON_ASTER:	operation = '*'; break;
 			case IDC_BUTTON_SLASH:	operation = '/'; break;
 			}
-			operation_changed = true;
+			operation_input = true;
 		}
 		if (LOWORD(wParam) == IDC_BUTTON_EQUAL)
 		{
@@ -326,7 +327,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			case '/': a /= b; break;
 			}
 			//old_operation = operation;
-			operation_changed = false;
+			operation_input = false;
 			sprintf(sz_buffer, "%g", a);
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)sz_buffer);
 		}
