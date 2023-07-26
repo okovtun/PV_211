@@ -95,6 +95,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	//SetFocus(hwnd);
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -247,6 +248,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	break;
 	case WM_COMMAND:
 	{
+		//SendMessage(hwnd, WM_SETFOCUS, NULL, NULL);
+		SetFocus(hwnd);
 		CONST INT SIZE = 256;
 		CHAR sz_buffer[SIZE] = {};
 		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
@@ -257,7 +260,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		static bool input = false;
 		static bool operation_input = false;
 		static char operation = 0;
-		static char old_operation = 0;
+		//static char old_operation = 0;
 		if (LOWORD(wParam) >= IDC_BUTTON_0 && LOWORD(wParam) <= IDC_BUTTON_9)
 		{
 			input = true;
@@ -287,10 +290,13 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) == IDC_BUTTON_CLEAR)
 		{
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"0");
-			a = 0;
+			a = b = 0;
 			stored = false;
 			input = false;
 			operation_input = false;
+			operation = 0;
+			//SendMessage(hwnd, WM_SETFOCUS, NULL, NULL);	//DOESN'T WORK
+			//SetFocus(hwnd);
 		}
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
@@ -362,9 +368,6 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		case VK_OEM_2:
 		case VK_DIVIDE:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_SLASH, 0); break;
 		case VK_RETURN:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0); break;
-		case VK_SHIFT:
-			symbol[0] = LOWORD(wParam);
-			//MessageBox(hwnd, symbol, "Symbol", MB_OK);
 		}
 		//if (GetKeyState(VK_SHIFT) & 0x8000 && GetKeyState(0x38) & 0x8000)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
 
