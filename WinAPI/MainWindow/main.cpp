@@ -104,7 +104,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL, //exStyle
 			"Edit",
 			"0",
-			WS_CHILD | WS_VISIBLE  | WS_BORDER | ES_RIGHT | ES_READONLY,
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_READONLY,
 			g_i_START_X, g_i_START_Y,
 			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
 			hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL
@@ -335,21 +335,45 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	break;
 	case WM_KEYDOWN:
 	{
-		switch (wParam)
+		//char symbol[2]{};
+		//symbol[0] = LOWORD(wParam);
+		//MessageBox(hwnd, symbol, "Symbol", MB_OK);
+
+		if (GetKeyState(VK_SHIFT) < 0)
+		{
+			if (wParam == 0x38)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
+		}
+		else
+		{
+			if (wParam >= 0x30 && wParam <= 0x39)
+				SendMessage(hwnd, WM_COMMAND, wParam - 0x30 + 1000, 0);
+
+		}
+		if (wParam >= 0x60 && wParam <= 0x69)
+			SendMessage(hwnd, WM_COMMAND, wParam - 0x60 + 1000, 0);
+
+		//if(GetKeyState(0x38) & 0x8000)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
+		switch (LOWORD(wParam))
 		{
 		case VK_OEM_PLUS:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_PLUS, 0);  break;
 		case VK_OEM_MINUS:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_MINUS, 0); break;
+			//case 0x09:
 		case VK_MULTIPLY:	SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0); break;
+		case VK_OEM_2:
 		case VK_DIVIDE:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_SLASH, 0); break;
 		case VK_RETURN:		SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_EQUAL, 0); break;
+		case VK_SHIFT:
+			symbol[0] = LOWORD(wParam);
+			//MessageBox(hwnd, symbol, "Symbol", MB_OK);
 		}
+		//if (GetKeyState(VK_SHIFT) & 0x8000 && GetKeyState(0x38) & 0x8000)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_ASTER, 0);
 
 		if (wParam == VK_OEM_PERIOD)SendMessage(hwnd, WM_COMMAND, IDC_BUTTON_POINT, 0);
 
-		if (wParam >= 0x30 && wParam <= 0x39)
+		/*if (wParam >= 0x30 && wParam <= 0x39)
 		{
 			SendMessage(hwnd, WM_COMMAND, wParam - 0x30 + 1000, 0);
-		}
+		}*/
 
 	}
 	break;

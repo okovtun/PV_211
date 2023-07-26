@@ -8,8 +8,11 @@ TODO:
    которая содержит координаты указателя мыши;
 2. Добить калькулятор;
 	TODO:
-		1. Не корректно работают операции;	DONE
+		0. Не корректно работают операции;	DONE
+		1. 3+++++ считать НЕ должно;
 		2. Ввод с клавиатуры некорректный;
+		https://learn.microsoft.com/en-us/windows/win32/inputdev/keyboard-input
+		https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input
 3. Сделать красивые кнопки в калькуляторе;
 
 DONE:
