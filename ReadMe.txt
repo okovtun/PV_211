@@ -10,10 +10,11 @@ TODO:
 	TODO:
 		0. Не корректно работают операции;	DONE
 		1. 3+++++ считать НЕ должно;
-		2. Ввод с клавиатуры некорректный;
+		2. Ввод с клавиатуры некорректный;	DONE
 		https://learn.microsoft.com/en-us/windows/win32/inputdev/keyboard-input
 		https://learn.microsoft.com/en-us/windows/win32/inputdev/about-keyboard-input
 3. Сделать красивые кнопки в калькуляторе;
+4. Сделать большие цифры на дисплее;
 
 DONE:
 1. Окно должно занимать ровно 3/4 экрана, и его размер при запуске должен адаптироваться под размер экрана;	DONE
