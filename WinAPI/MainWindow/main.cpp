@@ -287,8 +287,10 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (LOWORD(wParam) == IDC_BUTTON_CLEAR)
 		{
 			SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)"0");
-			a = 0;
+			a = b = 0;
 			stored = false;
+			input = false;
+			operation_input = false;
 		}
 		if (LOWORD(wParam) >= IDC_BUTTON_PLUS && LOWORD(wParam) <= IDC_BUTTON_SLASH)
 		{
