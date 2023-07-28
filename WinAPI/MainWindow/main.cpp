@@ -10,7 +10,10 @@ CONST INT g_i_DISTANCE = 10;	//Расстояние между кнопками
 CONST INT g_i_START_X = 10;	//Отступ от начала окна
 CONST INT g_i_START_Y = 10;	//Отступ от начала окна
 CONST INT g_i_DISPLAY_WIDTH = (g_i_BTN_SIZE * 5 + g_i_DISTANCE * 4);
-CONST INT g_i_DISPLAY_HEIGHT = 18;
+CONST INT g_i_DISPLAY_HEIGHT = 32;
+CONST CHAR g_sz_DISPLAY_FONT[] = "Tahoma";
+CONST INT g_i_DISPLAY_FONT_HEIGHT = g_i_DISPLAY_HEIGHT - 2;
+CONST INT g_i_DISPLAY_FONT_WIDTH = g_i_DISPLAY_FONT_HEIGHT / 2.5;
 
 INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -110,6 +113,24 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
 			hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL
 		);
+		/*LOGFONT lFont;
+		ZeroMemory(&lFont, sizeof(LOGFONT));
+		lFont.lfCharSet = DEFAULT_CHARSET;
+		lFont.lfHeight = -20;
+		HFONT hFont = CreateFontIndirect(&lFont);*/
+		HFONT hFont = CreateFont
+		(
+			g_i_DISPLAY_FONT_HEIGHT, g_i_DISPLAY_FONT_WIDTH,	//Height, Width
+			GM_ADVANCED, 0, 600,	//Escapement, Orientation, Weight - Толщина шрифта
+			FALSE, FALSE, FALSE,	//Italic - Курсив, Underline - Подчеркнутый, Strikeout - Перечеркнутый
+			DEFAULT_CHARSET,
+			OUT_CHARACTER_PRECIS,
+			CLIP_CHARACTER_PRECIS,
+			ANTIALIASED_QUALITY,
+			DEFAULT_PITCH | FF_DONTCARE,
+			g_sz_DISPLAY_FONT
+		);
+		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
 		CHAR sz_btn_name[] = "0";
 		INT number = 1;
 		for (int i = 0; i < 3; i++)
@@ -118,12 +139,12 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			{
 				//https://learn.microsoft.com/en-us/windows/win32/controls/button-styles
 				sz_btn_name[0] = number + 48;
-				CreateWindowEx
+				HWND hButtonDigit = CreateWindowEx
 				(
 					NULL,
 					"Button",
 					sz_btn_name,
-					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+					WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_ICON,
 					g_i_START_X /*+ g_i_DISTANCE*/ + (g_i_BTN_SIZE + g_i_DISTANCE)*j,
 					g_i_START_Y + g_i_DISTANCE + (g_i_BTN_SIZE + g_i_DISTANCE)*(2 - i) + g_i_DISPLAY_HEIGHT,
 					g_i_BTN_SIZE, g_i_BTN_SIZE,
@@ -131,6 +152,11 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					(HMENU)(number + 1000),
 					GetModuleHandle(NULL),
 					NULL
+				);
+				SendMessage
+				(
+					hButtonDigit, BM_SETIMAGE, IMAGE_ICON,
+					(LPARAM)LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(number + 200))
 				);
 				number++;
 			}
@@ -166,16 +192,18 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			hwnd, (HMENU)IDC_BUTTON_SLASH,
 			GetModuleHandle(NULL), NULL
 		);
-		CreateWindowEx
+		HWND hBtnAster = CreateWindowEx
 		(
 			NULL, "Button", "*",
-			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+			WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_ICON,
 			g_i_START_X + (g_i_BTN_SIZE + g_i_DISTANCE) * 3,
 			g_i_START_Y + g_i_DISPLAY_HEIGHT + (g_i_BTN_SIZE + g_i_DISTANCE * 2),
 			g_i_BTN_SIZE, g_i_BTN_SIZE,
 			hwnd, (HMENU)IDC_BUTTON_ASTER,
 			GetModuleHandle(NULL), NULL
 		);
+		HICON hIconAster = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_ICON_STAR));
+		SendMessage(hBtnAster, BM_SETIMAGE, IMAGE_ICON, (LPARAM)hIconAster);
 		CreateWindowEx
 		(
 			NULL, "Button", "-",

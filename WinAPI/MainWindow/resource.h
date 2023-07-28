@@ -6,6 +6,27 @@
 #define IDI_ICON_STAR                   102
 #define IDC_CURSOR1                     103
 
+#define IDI_ICON_0						200
+#define IDI_ICON_1						201
+#define IDI_ICON_2						202
+#define IDI_ICON_3						203
+#define IDI_ICON_4						204
+#define IDI_ICON_5						205
+#define IDI_ICON_6						206
+#define IDI_ICON_7						207
+#define IDI_ICON_8						208
+#define IDI_ICON_9						209
+
+
+#define IDI_ICON_POINT					210
+#define IDI_ICON_PLUS					211
+#define IDI_ICON_MINUS					212
+#define IDI_ICON_ASTER					213
+#define IDI_ICON_SLASH					214
+#define IDI_ICON_EQUAL					215
+#define IDI_ICON_CLEAR					216
+
+
 #define IDC_EDIT						 999
 #define IDC_BUTTON_0					1000
 #define IDC_BUTTON_1					1001
