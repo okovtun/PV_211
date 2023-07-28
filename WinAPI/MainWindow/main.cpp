@@ -36,7 +36,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 	wc.hCursor = (HCURSOR)LoadImage(hInstance, "starcraft_background.ani", IMAGE_CURSOR, LR_DEFAULTSIZE, LR_DEFAULTSIZE, LR_LOADFROMFILE);
 
-	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
+	//wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
+	wc.hbrBackground = CreateSolidBrush(RGB(0,0,200));
 
 	wc.hInstance = hInstance;
 	wc.lpfnWndProc = (WNDPROC)WndProc;
@@ -108,7 +109,7 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			NULL, //exStyle
 			"Edit",
 			"0",
-			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT | ES_READONLY,
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_RIGHT /*| ES_READONLY*/,
 			g_i_START_X, g_i_START_Y,
 			g_i_DISPLAY_WIDTH, g_i_DISPLAY_HEIGHT,
 			hwnd, (HMENU)IDC_EDIT, GetModuleHandle(NULL), NULL
@@ -131,6 +132,8 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			g_sz_DISPLAY_FONT
 		);
 		SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, TRUE);
+
+		
 		CHAR sz_btn_name[] = "0";
 		INT number = 1;
 		for (int i = 0; i < 3; i++)
@@ -253,6 +256,16 @@ INT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			GetModuleHandle(NULL), NULL
 		);
 
+	}
+	break;
+	case WM_CTLCOLOREDIT:
+	{
+		HDC hdc = (HDC)wParam;
+		SetBkMode(hdc, OPAQUE);
+		SetBkColor(hdc, RGB(0, 0, 100));
+		HBRUSH hBrush = CreateSolidBrush(RGB(0, 0, 255));
+		SetTextColor(hdc, RGB(255, 0, 0));
+		return (LRESULT)hBrush;
 	}
 	break;
 	case WM_SIZE:
