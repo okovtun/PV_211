@@ -72,6 +72,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+	static CHAR szFileName[MAX_PATH]{};
+	static CHAR szFileContent = NULL;
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -102,7 +104,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 		case ID_FILE_OPEN:
 		{
-			CHAR szFileName[MAX_PATH]{};
+			//CHAR szFileName[MAX_PATH]{};
 
 			OPENFILENAME ofn;
 			ZeroMemory(&ofn, sizeof(ofn));
@@ -118,9 +120,15 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			if (GetOpenFileName(&ofn)) LoadTextFileToEdit(GetDlgItem(hwnd, IDC_EDIT), szFileName);
 		}
 		break;
+		case ID_FILE_SAVE:
+		{
+			if (szFileName[0] == 0)SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVEAS, 0);
+			else SaveTextFileFromEdit(GetDlgItem(hwnd, IDC_EDIT), szFileName);
+		}
+		break;
 		case ID_FILE_SAVEAS:
 		{
-			CHAR szFileName[MAX_PATH] = {};
+			//CHAR szFileName[MAX_PATH] = {};
 
 			OPENFILENAME ofn;
 			ZeroMemory(&ofn, sizeof(ofn));
@@ -139,7 +147,35 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	break;
 	case WM_DESTROY:PostQuitMessage(0); break;
-	case WM_CLOSE:	DestroyWindow(hwnd); break;
+	case WM_CLOSE:
+	{
+		//CHAR sz_buffer[INT_MAX/2] = {};
+		BOOL close = FALSE;
+		HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
+		DWORD dwTextLength = SendMessage(hEdit, WM_GETTEXTLENGTH, 0, 0);
+		LPSTR lpszText = (LPSTR)GlobalAlloc(GPTR, dwTextLength + 1);
+		if (lpszText != NULL)
+		{
+			SendMessage(hEdit, WM_GETTEXT, UINT_MAX, (LPARAM)lpszText);
+			if (lpszText[0])
+			{
+				switch (MessageBox(hwnd, "Сохранить изменения?", "Вопрос", MB_YESNOCANCEL | MB_ICONQUESTION))
+				{
+				case IDYES:		SendMessage(hwnd, WM_COMMAND, ID_FILE_SAVE, 0);
+				case IDNO:		close = TRUE;
+					//case IDCANCEL:	return DefWindowProc(hwnd, uMsg, wParam, lParam);	break;
+				}
+			}
+			else
+			{
+				close = TRUE;
+			}
+			GlobalFree(lpszText);
+		}
+		//else DestroyWindow(hwnd);
+		if (close)DestroyWindow(hwnd);
+	}
+	break;
 	default: return DefWindowProc(hwnd, uMsg, wParam, lParam); break;
 	}
 	return 0;
