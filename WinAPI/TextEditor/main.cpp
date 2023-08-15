@@ -14,7 +14,7 @@ COLORREF g_rgbCustom[16] = {};
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-BOOL LoadTextFileToEdit(HWND hEdit, LPCSTR lpszFileName, LPCSTR lpszFileContent);
+BOOL LoadTextFileToEdit(HWND hEdit, LPCSTR lpszFileName);
 BOOL SaveTextFileFromEdit(HWND hEdit, LPCSTR lpszFileName);
 
 VOID SelectFont(HWND hwnd);
@@ -82,7 +82,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, IN
 LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	static CHAR szFileName[MAX_PATH]{};
-	static LPSTR lpszFileContent = (LPSTR)GlobalAlloc(GPTR, 256);
+	static LPSTR lpszFileContent = NULL;// (LPSTR)GlobalAlloc(GPTR, 256);
 	switch (uMsg)
 	{
 	case WM_CREATE:
@@ -126,7 +126,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 			ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
 			ofn.lpstrDefExt = "txt";
 
-			if (GetOpenFileName(&ofn)) LoadTextFileToEdit(GetDlgItem(hwnd, IDC_EDIT), szFileName, lpszFileContent);
+			if (GetOpenFileName(&ofn))
+			{
+				LoadTextFileToEdit(GetDlgItem(hwnd, IDC_EDIT), szFileName);
+				HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
+				DWORD dwTextLength = SendMessage(hEdit, WM_GETTEXTLENGTH, 0, 0);
+				lpszFileContent = (LPSTR)GlobalAlloc(GPTR, dwTextLength + 1);
+				SendMessage(hEdit, WM_GETTEXT, dwTextLength+1, (LPARAM)lpszFileContent);
+			}
 		}
 		break;
 		case ID_FILE_SAVE:
@@ -167,9 +174,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		LPSTR lpszText = (LPSTR)GlobalAlloc(GPTR, dwTextLength + 1);
 		if (lpszText != NULL)
 		{
-			SendMessage(hEdit, WM_GETTEXT, UINT_MAX, (LPARAM)lpszText);
+			SendMessage(hEdit, WM_GETTEXT, dwTextLength+1, (LPARAM)lpszText);
 
-			if (strcmp(lpszFileContent, lpszText))
+			if (lpszFileContent == NULL && lpszText[0] || lpszFileContent && strcmp(lpszFileContent, lpszText))
 			{
 				switch (MessageBox(hwnd, "Сохранить изменения?", "Вопрос", MB_YESNOCANCEL | MB_ICONQUESTION))
 				{
@@ -202,7 +209,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }
-BOOL LoadTextFileToEdit(HWND hEdit, LPCSTR lpszFileName, LPCSTR lpszFileContent)
+BOOL LoadTextFileToEdit(HWND hEdit, LPCSTR lpszFileName)
 {
 	BOOL bSuccess = FALSE;
 	HANDLE hFile = CreateFile(lpszFileName, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
@@ -212,14 +219,14 @@ BOOL LoadTextFileToEdit(HWND hEdit, LPCSTR lpszFileName, LPCSTR lpszFileContent)
 		if (dwFileSize != UINT_MAX)
 		{
 			LPSTR lpszFileText = (LPSTR)GlobalAlloc(GPTR, dwFileSize + 1);
-			LPSTR lpszFileContent = (LPSTR)GlobalAlloc(GPTR, dwFileSize + 1);
+			//lpszFileContent = (LPSTR)GlobalAlloc(GPTR, dwFileSize + 1);
 			if (lpszFileText)
 			{
 				DWORD dwRead;
 				if (ReadFile(hFile, lpszFileText, dwFileSize, &dwRead, NULL))
 				{
 					lpszFileText[dwFileSize] = 0;
-					strcpy(lpszFileContent, lpszFileText);
+					//strcpy((CHAR*)lpszFileContent, lpszFileText);
 					if (SendMessage(hEdit, WM_SETTEXT, 0, (LPARAM)lpszFileText))bSuccess = TRUE;
 				}
 				GlobalFree(lpszFileText);
@@ -302,5 +309,5 @@ VOID SelectColor(HWND hwnd)
 
 	if (ChooseColor(&cc))g_rgbBackground = cc.rgbResult;
 	//SendMessage(GetDlgItem(hwnd, IDC_EDIT), EMR_SETTEXTCOLOR)
-	SetTextColor(hdc, )
+	//SetTextColor(hdc, )
 }
