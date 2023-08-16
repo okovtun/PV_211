@@ -7,7 +7,7 @@ CONST CHAR g_sz_CLASS_NAME[] = "Text Editor PV_211";
 //g_ - Global
 //sz_ - string zero
 HFONT g_hFont = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
-COLORREF g_RGB_Text = RGB(0, 0, 0);
+COLORREF g_RGB_Text = RGB(0, 0, 200);
 
 COLORREF g_rgbBackground = RGB(255, 255, 255);
 COLORREF g_rgbCustom[16] = {};
@@ -266,11 +266,13 @@ VOID SelectFont(HWND hwnd)
 	CHOOSEFONT cf;
 	LOGFONT lf;
 	HWND hEdit = GetDlgItem(hwnd, IDC_EDIT);
-
-	ZeroMemory(&cf, sizeof(cf));
-	ZeroMemory(&lf, sizeof(lf));
+	HDC hdcEdit = GetDC(hEdit);
 
 	GetObject(g_hFont, sizeof(LOGFONT), &lf);
+
+	//ZeroMemory(&cf, sizeof(cf));
+	//ZeroMemory(&lf, sizeof(lf));
+
 
 	cf.lStructSize = sizeof(cf);
 	cf.hwndOwner = hwnd;
@@ -278,7 +280,7 @@ VOID SelectFont(HWND hwnd)
 	cf.Flags = CF_EFFECTS | CF_INITTOLOGFONTSTRUCT | CF_SCREENFONTS;
 	cf.hInstance = GetModuleHandle(NULL);
 	cf.lpLogFont = &lf;
-	cf.rgbColors = g_RGB_Text;
+	//cf.rgbColors = g_RGB_Text;
 
 	if (ChooseFont(&cf))
 	{
@@ -292,9 +294,12 @@ VOID SelectFont(HWND hwnd)
 			MessageBox(hwnd, "Font creation failed", "Error", MB_OK | MB_ICONERROR);
 		}
 		g_RGB_Text = cf.rgbColors;
+		SetBkMode(hdcEdit, OPAQUE);
+		SetTextColor(hdcEdit, RGB(0,0,255));
 	}
 	SendMessage(hEdit, WM_SETFONT, (WPARAM)g_hFont, TRUE);
 	SetFocus(hEdit);
+	ReleaseDC(hEdit, hdcEdit);
 }
 VOID SelectColor(HWND hwnd)
 {
@@ -308,6 +313,6 @@ VOID SelectColor(HWND hwnd)
 	cc.lpCustColors = g_rgbCustom;
 
 	if (ChooseColor(&cc))g_rgbBackground = cc.rgbResult;
-	//SendMessage(GetDlgItem(hwnd, IDC_EDIT), EMR_SETTEXTCOLOR)
+	//SendMessage(GetDlgItem(hwnd, IDC_EDIT), EMR_SETTEXTCOLOR, )
 	//SetTextColor(hdc, )
 }
