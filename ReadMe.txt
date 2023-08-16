@@ -7,6 +7,8 @@ TODO:
 1. Обеспечить открытие файл при затаскивании его на ярлык редактора на рабочем столе;
 2. Обеспечить открытие файл при затаскивании его в окно редактора;
 3. Подумать над сохранением файла;
+	https://legacy.cplusplus.com/reference/cstdlib/#:~:text=generator%20(function%20)-,Dynamic%20memory%20management,-calloc
+	https://learn.microsoft.com/en-us/windows/win32/memory/heap-functions
 
 TODO:
 1. В Solution 'WinAPI' добавить проект 'Mouse', и в этом проекте рядом с указателем мыши должна отображаться всплывающая подсказка,
