@@ -45,6 +45,7 @@ namespace Introduction
 			this.btnClose.Visible = true;
 			this.btnHideControls.Visible = true;
 			this.cbShowDate.Visible = true;
+			this.btnDateCalculator.Visible = true;
 		}
 
 		private void btnClose_Click(object sender, EventArgs e)
@@ -58,11 +59,18 @@ namespace Introduction
 			this.btnClose.Visible = false;
 			this.btnHideControls.Visible = false;
 			this.cbShowDate.Visible = false;
+			this.btnDateCalculator.Visible = false;
 		}
 
 		private void label1_Move(object sender, EventArgs e)
 		{
 
+		}
+
+		private void btnDateCalculator_Click(object sender, EventArgs e)
+		{
+			DateCalculator dc = new DateCalculator{};
+			dc.ShowDialog(this);
 		}
 	}
 }
