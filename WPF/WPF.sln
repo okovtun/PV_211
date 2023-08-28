@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF", "WPF\WPF.csproj", "{DFA9DAA3-3483-4B2A-9CF3-98308213E216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grid", "Grid\Grid.csproj", "{8ECB123E-6C68-4D0F-BDB7-B8877F3B4A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomUserControls", "CustomUserControls\CustomUserControls.csproj", "{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFA9DAA3-3483-4B2A-9CF3-98308213E216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA9DAA3-3483-4B2A-9CF3-98308213E216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA9DAA3-3483-4B2A-9CF3-98308213E216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA9DAA3-3483-4B2A-9CF3-98308213E216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8ECB123E-6C68-4D0F-BDB7-B8877F3B4A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8ECB123E-6C68-4D0F-BDB7-B8877F3B4A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8ECB123E-6C68-4D0F-BDB7-B8877F3B4A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8ECB123E-6C68-4D0F-BDB7-B8877F3B4A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8930B89F-258D-44B2-9D27-5D3E60EAB142}
+	EndGlobalSection
+EndGlobal

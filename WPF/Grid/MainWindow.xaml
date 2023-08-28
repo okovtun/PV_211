@@ -1,0 +1,44 @@
+﻿<Window x:Class="Grid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Grid"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+		<!--<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition />
+			<RowDefinition />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Rectangle Fill="Red" />
+		<Rectangle Grid.Row="1" Grid.Column="1" Fill="Green" />
+		<Rectangle Grid.Row="2" Grid.Column="0" Fill="Blue" />
+		<Rectangle Grid.Row="3" Grid.Column="1" Fill="Gray" />-->
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="70"/>
+			<RowDefinition />
+			<RowDefinition Height="20"/>
+		</Grid.RowDefinitions>
+		<Rectangle Grid.Row="0" Fill="Red" />
+		<Rectangle Grid.Row="2" Fill="Blue" />
+
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width=".2*"/>
+				<ColumnDefinition Width=".5*"/>
+				<ColumnDefinition Width=".3*"/>
+			</Grid.ColumnDefinitions>
+			<Rectangle Fill="LightGray" />
+			<Rectangle Grid.Column="1" Fill="Gray" />
+			<Rectangle Grid.Column="2" Fill="DarkGray" />
+		</Grid>
+	</Grid>
+</Window>
