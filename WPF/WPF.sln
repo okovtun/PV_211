@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grid", "Grid\Grid.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomUserControls", "CustomUserControls\CustomUserControls.csproj", "{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTextControls", "CustomTextControls\CustomTextControls.csproj", "{6944336E-7878-47C8-8D61-B4E6257B157C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E16FC7C2-B9D6-4AE0-BF64-AE25792DA2FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6944336E-7878-47C8-8D61-B4E6257B157C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6944336E-7878-47C8-8D61-B4E6257B157C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6944336E-7878-47C8-8D61-B4E6257B157C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6944336E-7878-47C8-8D61-B4E6257B157C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
