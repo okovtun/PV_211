@@ -14,7 +14,7 @@
 		</Grid.RowDefinitions>
 
 		<TextBox Name="txtInput" VerticalContentAlignment="Center" Width="250" Height="40"
-				 Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged, Mode=}"/>
+				 Text="{Binding BoundText, UpdateSourceTrigger=PropertyChanged}"/>
 		<Button Grid.Row="1" Name="btnSet" Content="Set" Width="100" Height="40" 
 				Click="BtnSet_Click"/>
 		<TextBlock Grid.Row="2" Name="tbResult" Text="{Binding BoundText}"

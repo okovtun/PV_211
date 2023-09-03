@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTextControls", "Custo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBinding", "DataBinding\DataBinding.csproj", "{9F7C7CB5-4179-454E-B43D-5E0AFC493571}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListView", "ListView\ListView.csproj", "{434B9B09-B030-4F51-85BE-9103095C7B6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObservableCollection", "ObservableCollection\ObservableCollection.csproj", "{A6FF57DE-A0AB-4D92-B5D2-C2E38151643F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{9F7C7CB5-4179-454E-B43D-5E0AFC493571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F7C7CB5-4179-454E-B43D-5E0AFC493571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F7C7CB5-4179-454E-B43D-5E0AFC493571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434B9B09-B030-4F51-85BE-9103095C7B6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434B9B09-B030-4F51-85BE-9103095C7B6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434B9B09-B030-4F51-85BE-9103095C7B6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434B9B09-B030-4F51-85BE-9103095C7B6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6FF57DE-A0AB-4D92-B5D2-C2E38151643F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6FF57DE-A0AB-4D92-B5D2-C2E38151643F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6FF57DE-A0AB-4D92-B5D2-C2E38151643F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6FF57DE-A0AB-4D92-B5D2-C2E38151643F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

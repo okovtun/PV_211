@@ -2,9 +2,6 @@
 https://www.youtube.com/watch?v=8WOtMA8pv4Y&list=PLeqyOOqxeiIMa-0fDCp-lpJ_qmDrZBmRI
 
 TODO:
-Текстовый редактор на WPF;
-
-TODO:
 1. Установить QT-Creator;
 2. Почитать про паттерн MVC;
 
