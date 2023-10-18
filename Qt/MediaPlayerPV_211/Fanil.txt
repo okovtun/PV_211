@@ -1,0 +1,2 @@
+:-1: warning: "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX64\x86\cl.exe" is used by qmake, but "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\bin\HostX64\x64\cl.exe" is configured in the kit.
+Please update your kit (Desktop Qt 5.12.12 MSVC2015 64bit) or choose a mkspec for qmake that matches your target environment better.
